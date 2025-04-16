@@ -1,8 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useState } from "react";
-import { CuboidIcon as Cube, X, MessageSquare } from "lucide-react";
+import { Suspense, useState, useRef } from "react";
+import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
@@ -28,6 +28,13 @@ export default function VisualizationPage() {
   // Modal state
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedTitle, setSelectedTitle] = useState<string>("");
+
+  // Add zoom state
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Define project type
   type Project = {
@@ -257,10 +264,44 @@ export default function VisualizationPage() {
     document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
   };
 
-  // Function to close the lightbox
+  // Add zoom handlers
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoomLevel > 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoomLevel > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Reset zoom and position when closing lightbox
   const closeLightbox = () => {
     setSelectedImage(null);
-    document.body.style.overflow = ""; // Re-enable scrolling
+    setZoomLevel(1);
+    setPosition({ x: 0, y: 0 });
+    document.body.style.overflow = "";
   };
 
   return (
@@ -443,11 +484,44 @@ export default function VisualizationPage() {
               <X className="h-6 w-6" />
             </button>
 
-            <div className="w-full h-full flex items-center justify-center">
+            {/* Zoom Controls */}
+            <div className="absolute top-4 left-4 flex gap-2 z-10">
+              <button
+                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleZoomIn();
+                }}
+              >
+                <ZoomIn className="h-6 w-6" />
+              </button>
+              <button
+                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleZoomOut();
+                }}
+              >
+                <ZoomOut className="h-6 w-6" />
+              </button>
+            </div>
+
+            <div 
+              className="w-full h-full flex items-center justify-center overflow-hidden"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
               <img
+                ref={imageRef}
                 src={selectedImage}
                 alt={selectedTitle}
-                className="max-w-full max-h-full object-contain"
+                className="max-w-full max-h-full object-contain transition-transform duration-200"
+                style={{
+                  transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
+                  cursor: zoomLevel > 1 ? 'grab' : 'default',
+                }}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
