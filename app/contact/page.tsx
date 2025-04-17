@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Mail } from "lucide-react"
+import { Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import Header from "@/components/header"
 
 function ContactForm() {
@@ -25,6 +25,11 @@ function ContactForm() {
     date: "",
     time: "",
   })
+  
+  // Form submission states
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState("")
 
   // Focus on first input when requested via URL parameter
   useEffect(() => {
@@ -32,6 +37,17 @@ function ContactForm() {
       nameInputRef.current.focus()
     }
   }, [searchParams])
+
+  // Reset form status after 5 seconds
+  useEffect(() => {
+    if (submitStatus !== 'idle') {
+      const timer = setTimeout(() => {
+        setSubmitStatus('idle')
+        setErrorMessage("")
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [submitStatus])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -42,20 +58,68 @@ function ContactForm() {
     setFormData((prev) => ({ ...prev, projectType: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Here you would typically send the data to your backend or email service
-    alert("Thank you for your message! I'll get back to you soon.")
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      projectType: "",
-      message: "",
-      date: "",
-      time: "",
-    })
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setErrorMessage("")
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      
+      const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again later.')
+      }
+      
+      // Success! Reset the form
+      setSubmitStatus('success')
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        projectType: "",
+        message: "",
+        date: "",
+        time: "",
+      })
+    } catch (error) {
+      setSubmitStatus('error')
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message. Please try again.')
+      console.error('Error submitting form:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Status display component
+  const StatusMessage = () => {
+    if (submitStatus === 'success') {
+      return (
+        <div className="flex items-center gap-2 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md mb-4">
+          <CheckCircle className="h-5 w-5" />
+          <span>Thank you for your message! I'll get back to you soon.</span>
+        </div>
+      )
+    }
+    
+    if (submitStatus === 'error') {
+      return (
+        <div className="flex items-center gap-2 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-md mb-4">
+          <AlertCircle className="h-5 w-5" />
+          <span>{errorMessage}</span>
+        </div>
+      )
+    }
+    
+    return null
   }
 
   return (
@@ -77,7 +141,7 @@ function ContactForm() {
               Schedule a call
             </Button>
             <div className="flex items-center bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-full">
-              <span className="text-gray-700 dark:text-gray-300">uluoluebube@gmail.com</span>
+              <span className="text-gray-700 dark:text-gray-300">cabdikariim405@gmail.com</span>
             </div>
           </div>
         </section>
@@ -90,6 +154,9 @@ function ContactForm() {
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Send a message</h2>
           </div>
+
+          {/* Status message */}
+          <StatusMessage />
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -104,6 +171,7 @@ function ContactForm() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   ref={nameInputRef}
                   className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
                 />
@@ -120,6 +188,7 @@ function ContactForm() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
@@ -135,6 +204,7 @@ function ContactForm() {
                 placeholder="Google..."
                 value={formData.company}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
               />
             </div>
@@ -143,15 +213,19 @@ function ContactForm() {
               <label htmlFor="projectType" className="text-sm text-gray-600 dark:text-gray-400">
                 What kind of Project are we working on?
               </label>
-              <Select value={formData.projectType} onValueChange={handleSelectChange}>
+              <Select 
+                value={formData.projectType} 
+                onValueChange={handleSelectChange}
+                disabled={isSubmitting}
+              >
                 <SelectTrigger className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700">
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="3d_visualization">3D Visualization</SelectItem>
+                  <SelectItem value="3d_animation">3D Animation</SelectItem>
+                  <SelectItem value="vfx">VFX / CGI</SelectItem>
                   <SelectItem value="branding">Branding</SelectItem>
-                  <SelectItem value="logo">Logo Design</SelectItem>
-                  <SelectItem value="marketing">Marketing Design</SelectItem>
-                  <SelectItem value="social">Social Media Design</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
@@ -168,6 +242,7 @@ function ContactForm() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                disabled={isSubmitting}
                 className="min-h-[120px] rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
               />
             </div>
@@ -183,6 +258,7 @@ function ContactForm() {
                   type="date"
                   value={formData.date}
                   onChange={handleChange}
+                  disabled={isSubmitting}
                   className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
@@ -196,13 +272,25 @@ function ContactForm() {
                   type="time"
                   value={formData.time}
                   onChange={handleChange}
+                  disabled={isSubmitting}
                   className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white rounded">
-              Submit
+            <Button 
+              type="submit" 
+              className="w-full bg-red-500 hover:bg-red-600 text-white rounded"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending...
+                </span>
+              ) : (
+                'Submit'
+              )}
             </Button>
           </form>
         </section>

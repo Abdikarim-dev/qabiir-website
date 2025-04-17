@@ -1,12 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useState, useRef } from "react";
-import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut } from "lucide-react";
+import { Suspense, useState, useRef, useEffect } from "react";
+import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, RotateCcw, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
+import Header from "@/components/header";
 
 // Dynamically import components
 const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
@@ -19,8 +20,8 @@ const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
 const ProgressiveImage = dynamic(
   () => import("@/components/progressive-image"),
   {
-    ssr: true,
-    loading: () => <ImageSkeleton />,
+  ssr: true,
+  loading: () => <ImageSkeleton />,
   }
 );
 
@@ -28,6 +29,7 @@ export default function VisualizationPage() {
   // Modal state
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedTitle, setSelectedTitle] = useState<string>("");
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   // Add zoom state
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -35,6 +37,11 @@ export default function VisualizationPage() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Filter state
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [categories, setCategories] = useState<string[]>([]);
 
   // Define project type
   type Project = {
@@ -251,26 +258,48 @@ export default function VisualizationPage() {
     },
   ];
 
+  // Generate unique categories on component mount
+  useEffect(() => {
+    const uniqueCategories = Array.from(
+      new Set(projects.map((project) => project.category))
+    );
+    setCategories(["All", ...uniqueCategories]);
+  }, []);
+
+  // Filter projects based on active category
+  const filteredProjects = activeCategory === "All"
+    ? projects
+    : projects.filter(project => project.category === activeCategory);
+
   // Featured project is the first one
-  const featuredProject = projects[0];
+  const featuredProject = filteredProjects[0];
 
   // The rest of the projects will be displayed in the grid
-  const gridProjects = projects.slice(1);
+  const gridProjects = filteredProjects.slice(1);
 
   // Function to open the lightbox
   const openLightbox = (image: string, title: string) => {
+    const index = filteredProjects.findIndex(project => project.image === image);
     setSelectedImage(image);
     setSelectedTitle(title);
+    setSelectedIndex(index);
     document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
   };
 
   // Add zoom handlers
   const handleZoomIn = () => {
     setZoomLevel(prev => Math.min(prev + 0.25, 3));
+    setPosition({ x: 0, y: 0 }); // Reset position when zooming
   };
 
   const handleZoomOut = () => {
     setZoomLevel(prev => Math.max(prev - 0.25, 1));
+    setPosition({ x: 0, y: 0 }); // Reset position when zooming
+  };
+
+  const resetZoom = () => {
+    setZoomLevel(1);
+    setPosition({ x: 0, y: 0 });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -304,234 +333,326 @@ export default function VisualizationPage() {
     document.body.style.overflow = "";
   };
 
+  // Navigation between images in lightbox
+  const goToNextImage = () => {
+    if (selectedIndex < filteredProjects.length - 1) {
+      const nextIndex = selectedIndex + 1;
+      setSelectedIndex(nextIndex);
+      setSelectedImage(filteredProjects[nextIndex].image);
+      setSelectedTitle(filteredProjects[nextIndex].title);
+      resetZoom();
+    }
+  };
+
+  const goToPrevImage = () => {
+    if (selectedIndex > 0) {
+      const prevIndex = selectedIndex - 1;
+      setSelectedIndex(prevIndex);
+      setSelectedImage(filteredProjects[prevIndex].image);
+      setSelectedTitle(filteredProjects[prevIndex].title);
+      resetZoom();
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowRight':
+          goToNextImage();
+          break;
+        case 'ArrowLeft':
+          goToPrevImage();
+          break;
+        case '+':
+        case '=':
+          handleZoomIn();
+          break;
+        case '-':
+          handleZoomOut();
+          break;
+        case '0':
+          resetZoom();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, selectedIndex]);
+
+  // Focus trap for modal
+  useEffect(() => {
+    if (selectedImage && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [selectedImage]);
+
   return (
+    <>
+      <Header />
     <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
       {/* Hero Section */}
       <section className="w-full py-8">
-        <Suspense
-          fallback={
-            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-          }
-        >
-          <AnimatedSection
-            animation="slide-up"
-            className="flex flex-col items-center mb-12"
+          <Suspense
+            fallback={
+              <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+            }
           >
+            <AnimatedSection
+              animation="slide-up"
+              className="flex flex-col items-center mb-12"
+            >
             <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-4">
               <Cube className="h-8 w-8 text-blue-500" />
             </div>
-            <h1 className="text-4xl font-bold text-center mb-4">
-              3D Visualization
-            </h1>
+              <h1 className="text-4xl font-bold text-center mb-4">
+                3D Visualization
+              </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-2xl">
-              Creating photorealistic 3D visualizations for products, packaging,
-              and branding that showcase your designs with stunning detail and
-              lighting.
+                Creating photorealistic 3D visualizations for products, packaging,
+                and branding that showcase your designs with stunning detail and
+                lighting.
             </p>
           </AnimatedSection>
         </Suspense>
 
+          {/* Category Filter */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Filter className="h-4 w-4 text-gray-500" />
+              <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Category</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                    activeCategory === category
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {filteredProjects.length > 0 ? (
+            <>
         {/* Featured Project */}
-        <Suspense
-          fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
-        >
+              <Suspense
+                fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
+              >
           <AnimatedSection animation="fade-in" className="mb-16">
-            <div
-              className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
-              onClick={() =>
-                openLightbox(featuredProject.image, featuredProject.title)
-              }
-            >
-              <ProgressiveImage
-                src={featuredProject.image}
-                alt={featuredProject.title}
-                fill
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                priority
-              />
+                  <div
+                    className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() =>
+                      openLightbox(featuredProject.image, featuredProject.title)
+                    }
+                  >
+                <ProgressiveImage
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  fill
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  priority
+                />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <h2 className="text-white text-xl font-bold">{featuredProject.title}</h2>
+                      <p className="text-gray-200 text-sm">{featuredProject.category}</p>
+                </div>
             </div>
           </AnimatedSection>
         </Suspense>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {gridProjects.map((project, index) => (
-            <div key={project.id} className="group cursor-pointer">
-              <Suspense
-                fallback={<ImageSkeleton height={300} className="w-full" />}
-              >
+                {gridProjects.map((project, index) => (
+                  <div key={project.id} className="group cursor-pointer">
+                    <Suspense
+                      fallback={<ImageSkeleton height={300} className="w-full" />}
+                    >
                 <AnimatedSection
-                  animation="slide-up"
-                  delay={100 * index}
+                        animation="slide-up"
+                        delay={100 * index}
                   className="h-full"
                 >
-                  <div
-                    className="relative aspect-square rounded-lg overflow-hidden h-full"
-                    onClick={() => openLightbox(project.image, project.title)}
-                  >
-                    <ProgressiveImage
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
+                        <div
+                          className="relative aspect-square rounded-lg overflow-hidden h-full"
+                          onClick={() => openLightbox(project.image, project.title)}
+                        >
+                      <ProgressiveImage
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <h3 className="text-white font-bold">{project.title}</h3>
+                            <p className="text-gray-200 text-sm">{project.category}</p>
+                    </div>
                   </div>
                 </AnimatedSection>
               </Suspense>
-            </div>
+                  </div>
           ))}
         </div>
+            </>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-16">
+              <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">No projects found in this category.</p>
+              <Button
+                variant="outline"
+                onClick={() => setActiveCategory("All")}
+                className="rounded-md"
+              >
+                Show all projects
+              </Button>
+            </div>
+          )}
       </section>
 
       {/* Services Section */}
       <section className="w-full py-16">
-        {/* <Suspense
-          fallback={
-            <div className="h-60 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse mb-16"></div>
-          }
-        >
-          <AnimatedSection animation="slide-up" className="mb-16">
-            <h2 className="text-2xl font-bold mb-8">Visualization Services</h2>
+          {/* CTA Section */}
+          <Suspense
+            fallback={
+              <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+            }
+          >
+            {/* Pre-Footer / Contact CTA */}
+            <PreFooter />
+          </Suspense>
+        </section>
 
-            <div className="space-y-8">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-bold mb-2">
-                    Product Visualization
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Showcase your products with photorealistic 3D renders that
-                    highlight every detail, material, and feature before
-                    physical production.
-                  </p>
-                </div>
-
-                <div className="md:w-2/3 bg-gray-100 dark:bg-gray-800 rounded-lg h-48 flex items-center justify-center">
-                  <img
-                    src={projects[3].image}
-                    alt="Product Visualization Example"
-                    className="h-full object-contain"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3 md:order-2">
-                  <h3 className="text-xl font-bold mb-2">Packaging Design</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Visualize packaging concepts with realistic materials,
-                    lighting, and environments to see how your products will
-                    look on shelves.
-                  </p>
-                </div>
-
-                <div className="md:w-2/3 md:order-1 bg-gray-100 dark:bg-gray-800 rounded-lg h-48 flex items-center justify-center">
-                  <img
-                    src={projects[5].image}
-                    alt="Packaging Visualization Example"
-                    className="h-full object-contain"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-bold mb-2">
-                    Cosmetic Visualization
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Create stunning visualizations for cosmetic products with
-                    realistic textures, lighting, and effects that highlight
-                    product features.
-                  </p>
-                </div>
-
-                <div className="md:w-2/3 bg-gray-100 dark:bg-gray-800 rounded-lg h-48 flex items-center justify-center">
-                  <img
-                    src={projects[4].image}
-                    alt="Cosmetic Visualization Example"
-                    className="h-full object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </Suspense> */}
-
-        {/* CTA Section */}
-        <Suspense
-          fallback={
-            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-          }
-        >
-          {/* Pre-Footer / Contact CTA */}
-          <PreFooter />
-        </Suspense>
-      </section>
-
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center"
-          onClick={closeLightbox}
-        >
-          <div className="relative w-full h-full flex flex-col items-center justify-center">
-            <button
-              className="absolute top-4 right-4 bg-black/50 rounded-full p-2 text-white z-10 hover:bg-black/70"
-              onClick={closeLightbox}
-            >
-              <X className="h-6 w-6" />
-            </button>
-
-            {/* Zoom Controls */}
-            <div className="absolute top-4 left-4 flex gap-2 z-10">
+        {/* Lightbox Modal */}
+        {selectedImage && (
+          <div
+            ref={modalRef}
+            className="fixed inset-0 bg-black z-50 flex items-center justify-center outline-none"
+            onClick={closeLightbox}
+            onKeyDown={(e) => e.key === 'Escape' && closeLightbox()}
+            tabIndex={0}
+            aria-modal="true"
+            aria-labelledby="lightbox-title"
+            role="dialog"
+          >
+            <div className="relative w-full h-full flex flex-col items-center justify-center">
               <button
-                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                className="absolute top-4 right-4 bg-black/50 rounded-full p-2 text-white z-10 hover:bg-black/70"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleZoomIn();
+                  closeLightbox();
                 }}
+                aria-label="Close lightbox"
               >
-                <ZoomIn className="h-6 w-6" />
+                <X className="h-6 w-6" />
               </button>
-              <button
-                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleZoomOut();
-                }}
+
+              {/* Zoom Controls */}
+              <div className="absolute top-4 left-4 flex gap-2 z-10">
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomIn();
+                  }}
+                  aria-label="Zoom in"
+                >
+                  <ZoomIn className="h-6 w-6" />
+                </button>
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomOut();
+                  }}
+                  aria-label="Zoom out"
+                >
+                  <ZoomOut className="h-6 w-6" />
+                </button>
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetZoom();
+                  }}
+                  aria-label="Reset zoom"
+                >
+                  <RotateCcw className="h-6 w-6" />
+                </button>
+                <div className="bg-black/50 rounded-full px-3 flex items-center text-white">
+                  {Math.round(zoomLevel * 100)}%
+                </div>
+              </div>
+
+              {/* Previous/Next buttons */}
+              {selectedIndex > 0 && (
+                <button
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToPrevImage();
+                  }}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+              )}
+              
+              {selectedIndex < filteredProjects.length - 1 && (
+                <button
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToNextImage();
+                  }}
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              )}
+
+              <div 
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
               >
-                <ZoomOut className="h-6 w-6" />
-              </button>
-            </div>
+                <img
+                  ref={imageRef}
+                  src={selectedImage}
+                  alt={selectedTitle}
+                  className="max-w-full max-h-full object-contain transition-transform duration-200"
+                  style={{
+                    transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
+                    cursor: zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
 
-            <div 
-              className="w-full h-full flex items-center justify-center overflow-hidden"
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-            >
-              <img
-                ref={imageRef}
-                src={selectedImage}
-                alt={selectedTitle}
-                className="max-w-full max-h-full object-contain transition-transform duration-200"
-                style={{
-                  transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
-                  cursor: zoomLevel > 1 ? 'grab' : 'default',
-                }}
-                onClick={(e) => e.stopPropagation()}
-              />
+              <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
+                <h3 id="lightbox-title" className="text-lg font-medium">{selectedTitle}</h3>
+                <p className="text-sm text-gray-300">Image {selectedIndex + 1} of {filteredProjects.length}</p>
+                <div className="text-xs text-gray-400 mt-1">
+                  Use arrow keys to navigate • Press ESC to close • +/- to zoom • 0 to reset zoom
+                </div>
+              </div>
             </div>
-
-            <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
-              <h3 className="text-lg font-medium">{selectedTitle}</h3>
             </div>
-          </div>
-        </div>
-      )}
+        )}
     </main>
+    </>
   );
 }

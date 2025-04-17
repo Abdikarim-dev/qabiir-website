@@ -203,7 +203,7 @@ export default function AnimationPage() {
                 delay={100 * index}
                 className="h-full"
               >
-                <div className="relative aspect-video">
+              <div className="relative aspect-video">
                   <CloudinaryVideoWrapper
                     publicId={project.cloudinaryId}
                     className="w-full h-full object-cover rounded-lg"
