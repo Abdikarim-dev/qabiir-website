@@ -170,29 +170,31 @@ export default function AnimationPage() {
         <div className="mb-16">
           <Suspense
             fallback={
-              <div className="w-full aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+              <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
             }
           >
-            <CloudinaryVideoWrapper
-              publicId={
-                filteredProjects[0]?.cloudinaryId ||
-                animationProjects[0].cloudinaryId
-              }
-              className="w-full aspect-video rounded-lg overflow-hidden"
-              controls={true}
-              autoPlay={false}
-              loop={true}
-              muted={true}
-              poster={getCloudinaryThumbnail(
-                filteredProjects[0]?.cloudinaryId ||
+            <div className="w-full max-w-2xl mx-auto">
+              <CloudinaryVideoWrapper
+                publicId={
+                  filteredProjects[0]?.cloudinaryId ||
                   animationProjects[0].cloudinaryId
-              )}
-            />
+                }
+                className="w-full aspect-[16/9] rounded-lg overflow-hidden"
+                controls={true}
+                autoPlay={false}
+                loop={true}
+                muted={true}
+                poster={getCloudinaryThumbnail(
+                  filteredProjects[0]?.cloudinaryId ||
+                    animationProjects[0].cloudinaryId
+                )}
+              />
+            </div>
           </Suspense>
         </div>
 
         {/* Animation Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
           {filteredProjects.slice(1).map((project, index) => (
             <div
               key={project.id}
@@ -203,7 +205,7 @@ export default function AnimationPage() {
                 delay={100 * index}
                 className="h-full"
               >
-              <div className="relative aspect-video">
+                <div className="relative aspect-[9/16] max-w-md mx-auto">
                   <CloudinaryVideoWrapper
                     publicId={project.cloudinaryId}
                     className="w-full h-full object-cover rounded-lg"
