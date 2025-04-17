@@ -57,28 +57,71 @@ export default function Designs() {
       id: "design-1",
       title: "Social Media Design 1",
       category: "Social Media",
-      image: "/3-Poster-halabeeg-01.png",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
     },
     {
       id: "design-2",
-      title: "Social Media Design 2",
-      category: "Social Media",
-      image: "/2-April-08.png",
+      title: "Eid Poster Design",
+      category: "Posters",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890791/1-Eid_poster_tmzpza.png",
     },
     {
       id: "design-3",
-      title: "Marketing Design 1",
-      category: "Marketing",
-      image: "/4.jpg",
+      title: "February Social Post",
+      category: "Social Media",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
     },
     {
       id: "design-4",
-      title: "Poster Design 1",
-      category: "Posters",
-      image: "/1-eid-Poster.png",
+      title: "Marketing Campaign",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890151/ccklyp2e6r9n09xqr0ql.png",
     },
-    // Add more design projects here...
+    {
+      id: "design-5",
+      title: "Brand Design",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890040/g5d021eh6sy2dwagakg8.png",
+    },
+    {
+      id: "design-6",
+      title: "Social Media Campaign",
+      category: "Social Media",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890022/wjbbcdum15wz47dgod9b.png",
+    },
+    {
+      id: "design-7",
+      title: "Marketing Design",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889783/o8yf2rfbzmhsdwhofz83.png",
+    },
+    {
+      id: "design-8",
+      title: "Promotional Design",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889666/on1cxjdg97fpumrk1rvc.jpg",
+    },
+    {
+      id: "design-9",
+      title: "Social Media Post",
+      category: "Social Media",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889567/z3qtskx30kacttqpvile.png",
+    },
+    {
+      id: "design-10",
+      title: "Brand Campaign",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889529/ph7zfqjrykkjw1bnf7bd.png",
+    },
+    {
+      id: "design-11",
+      title: "Marketing Visual",
+      category: "Marketing",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889310/mpeu4z05fueqpnujnrsx.jpg",
+    },
   ];
+  // Add more design projects here...
+  
 
   // Generate unique categories on component mount
   useEffect(() => {
@@ -257,11 +300,11 @@ export default function Designs() {
           <>
             {/* Featured Project */}
             <Suspense
-              fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
+              fallback={<ImageSkeleton height={600} className="w-full mb-16" />}
             >
               <AnimatedSection animation="fade-in" className="mb-16">
                 <div
-                  className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
+                  className="relative aspect-[3/4] rounded-lg overflow-hidden cursor-pointer"
                   onClick={() =>
                     openLightbox(featuredProject.image, featuredProject.title)
                   }
@@ -286,7 +329,7 @@ export default function Designs() {
               {gridProjects.map((project, index) => (
                 <div key={project.id} className="group cursor-pointer">
                   <Suspense
-                    fallback={<ImageSkeleton height={300} className="w-full" />}
+                    fallback={<ImageSkeleton height={500} className="w-full" />}
                   >
                     <AnimatedSection
                       animation="slide-up"
@@ -294,7 +337,7 @@ export default function Designs() {
                       className="h-full"
                     >
                       <div
-                        className="relative aspect-square rounded-lg overflow-hidden h-full"
+                        className="relative aspect-[3/4] rounded-lg overflow-hidden h-full"
                         onClick={() => openLightbox(project.image, project.title)}
                       >
                         <ProgressiveImage
