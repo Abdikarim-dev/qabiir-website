@@ -1,361 +1,463 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import PreFooter from "@/components/pre-footer"
+"use client";
+
+import dynamic from "next/dynamic";
+import { Suspense, useState, useRef, useEffect } from "react";
+import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, RotateCcw, Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ImageSkeleton from "@/components/image-skeleton";
+import Link from "next/link";
+import PreFooter from "@/components/pre-footer";
+import Header from "@/components/header";
+
+// Dynamically import components
+const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
+  ssr: true,
+  loading: () => (
+    <div className="animate-pulse bg-gray-200 dark:bg-gray-800 rounded-lg h-24"></div>
+  ),
+});
+
+const ProgressiveImage = dynamic(
+  () => import("@/components/progressive-image"),
+  {
+  ssr: true,
+  loading: () => <ImageSkeleton />,
+  }
+);
 
 export default function Designs() {
+  // Modal state
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedTitle, setSelectedTitle] = useState<string>("");
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  // Add zoom state
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLImageElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Filter state
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [categories, setCategories] = useState<string[]>([]);
+
+  // Define project type
+  type Project = {
+    id: string;
+    title: string;
+    category: string;
+    image: string;
+  };
+
+  // Projects data for designs
+  const projects: Project[] = [
+    {
+      id: "design-1",
+      title: "Social Media Design 1",
+      category: "Social Media",
+      image: "/3-Poster-halabeeg-01.png",
+    },
+    {
+      id: "design-2",
+      title: "Social Media Design 2",
+      category: "Social Media",
+      image: "/2-April-08.png",
+    },
+    {
+      id: "design-3",
+      title: "Marketing Design 1",
+      category: "Marketing",
+      image: "/4.jpg",
+    },
+    {
+      id: "design-4",
+      title: "Poster Design 1",
+      category: "Posters",
+      image: "/1-eid-Poster.png",
+    },
+    // Add more design projects here...
+  ];
+
+  // Generate unique categories on component mount
+  useEffect(() => {
+    const uniqueCategories = Array.from(
+      new Set(projects.map((project) => project.category))
+    );
+    setCategories(["All", ...uniqueCategories]);
+  }, []);
+
+  // Filter projects based on active category
+  const filteredProjects = activeCategory === "All"
+    ? projects
+    : projects.filter(project => project.category === activeCategory);
+
+  // Featured project is the first one
+  const featuredProject = filteredProjects[0];
+
+  // The rest of the projects will be displayed in the grid
+  const gridProjects = filteredProjects.slice(1);
+
+  // Function to open the lightbox
+  const openLightbox = (image: string, title: string) => {
+    const index = filteredProjects.findIndex(project => project.image === image);
+    setSelectedImage(image);
+    setSelectedTitle(title);
+    setSelectedIndex(index);
+    document.body.style.overflow = "hidden";
+  };
+
+  // Add zoom handlers
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const resetZoom = () => {
+    setZoomLevel(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoomLevel > 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoomLevel > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Reset zoom and position when closing lightbox
+  const closeLightbox = () => {
+    setSelectedImage(null);
+    setZoomLevel(1);
+    setPosition({ x: 0, y: 0 });
+    document.body.style.overflow = "";
+  };
+
+  // Navigation between images in lightbox
+  const goToNextImage = () => {
+    if (selectedIndex < filteredProjects.length - 1) {
+      const nextIndex = selectedIndex + 1;
+      setSelectedIndex(nextIndex);
+      setSelectedImage(filteredProjects[nextIndex].image);
+      setSelectedTitle(filteredProjects[nextIndex].title);
+      resetZoom();
+    }
+  };
+
+  const goToPrevImage = () => {
+    if (selectedIndex > 0) {
+      const prevIndex = selectedIndex - 1;
+      setSelectedIndex(prevIndex);
+      setSelectedImage(filteredProjects[prevIndex].image);
+      setSelectedTitle(filteredProjects[prevIndex].title);
+      resetZoom();
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowRight':
+          goToNextImage();
+          break;
+        case 'ArrowLeft':
+          goToPrevImage();
+          break;
+        case '+':
+        case '=':
+          handleZoomIn();
+          break;
+        case '-':
+          handleZoomOut();
+          break;
+        case '0':
+          resetZoom();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, selectedIndex]);
+
+  // Focus trap for modal
+  useEffect(() => {
+    if (selectedImage && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [selectedImage]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      {/* Hero Section */}
-      <section className="w-full max-w-3xl px-4 py-8 mt-8">
-        <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">
-          Social Media, Marketing & Poster Designs
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          A collection of social media posts, marketing materials, and poster designs created for various clients and
-          campaigns.
-        </p>
-      </section>
+    <>
+      <Header />
+      <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
+        {/* Keep existing header section */}
+        <section className="w-full max-w-3xl px-4 py-8 mt-8">
+          <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">
+            Social Media, Marketing & Poster Designs
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            A collection of social media posts, marketing materials, and poster designs created for various clients and
+            campaigns.
+          </p>
+        </section>
 
-      {/* Designs Grid */}
-      <section className="w-full max-w-3xl px-4 py-4 mb-6">
-        <div className="grid grid-cols-2 gap-4">
-          {/* Row 1 */}
-          <div className="bg-blue-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 1"
-              className="w-full h-full object-cover rounded"
-            />
+        {/* Category Filter */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Filter className="h-4 w-4 text-gray-500" />
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Category</h2>
           </div>
-          <div className="bg-blue-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 2"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 2 */}
-          <div className="bg-blue-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 3"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-blue-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 4"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 3 */}
-          <div className="bg-blue-300 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 5"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-blue-300 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 6"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 4 */}
-          <div className="bg-cyan-300 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 7"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-orange-300 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 8"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 5 */}
-          <div className="bg-purple-700 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Poster Design 1"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-purple-600 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Poster Design 2"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 6 */}
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 1"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 2"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 7 */}
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 3"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-gray-900 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 4"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 8 */}
-          <div className="bg-purple-800 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Poster Design 3"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-pink-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Poster Design 4"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 9 */}
-          <div className="bg-pink-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 9"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-purple-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 10"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 10 */}
-          <div className="bg-yellow-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 5"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-yellow-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 6"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 11 */}
-          <div className="bg-cyan-300 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 11"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-purple-800 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 12"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 12 */}
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 7"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 8"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 13 */}
-          <div className="bg-blue-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 13"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-purple-600 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Social Media Design 14"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 14 */}
-          <div className="bg-gray-200 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 9"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-purple-500 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 10"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-
-          {/* Row 15 */}
-          <div className="bg-yellow-400 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 11"
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-          <div className="bg-green-600 rounded-lg p-3 aspect-square">
-            <Image
-              src="/placeholder.svg?height=300&width=300"
-              width={300}
-              height={300}
-              alt="Marketing Design 12"
-              className="w-full h-full object-cover rounded"
-            />
+          <div className="flex flex-wrap gap-2">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  activeCategory === category
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </div>
-      </section>
 
-      {/* Contact Section */}
-      {/* <section className="w-full max-w-3xl px-4 py-12 mb-12">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="w-4 h-4 rounded-full bg-green-500"></div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">I'm available for new projects</p>
-        </div>
+        {filteredProjects.length > 0 ? (
+          <>
+            {/* Featured Project */}
+            <Suspense
+              fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
+            >
+              <AnimatedSection animation="fade-in" className="mb-16">
+                <div
+                  className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() =>
+                    openLightbox(featuredProject.image, featuredProject.title)
+                  }
+                >
+                  <ProgressiveImage
+                    src={featuredProject.image}
+                    alt={featuredProject.title}
+                    fill
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h2 className="text-white text-xl font-bold">{featuredProject.title}</h2>
+                    <p className="text-gray-200 text-sm">{featuredProject.category}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </Suspense>
 
-        <div className="flex gap-4">
-          <Button className="bg-red-500 hover:bg-red-600 rounded-full text-white">Schedule a call</Button>
-          <Button
-            variant="outline"
-            className="rounded-full border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
+            {/* Project Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {gridProjects.map((project, index) => (
+                <div key={project.id} className="group cursor-pointer">
+                  <Suspense
+                    fallback={<ImageSkeleton height={300} className="w-full" />}
+                  >
+                    <AnimatedSection
+                      animation="slide-up"
+                      delay={100 * index}
+                      className="h-full"
+                    >
+                      <div
+                        className="relative aspect-square rounded-lg overflow-hidden h-full"
+                        onClick={() => openLightbox(project.image, project.title)}
+                      >
+                        <ProgressiveImage
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <h3 className="text-white font-bold">{project.title}</h3>
+                          <p className="text-gray-200 text-sm">{project.category}</p>
+                        </div>
+                      </div>
+                    </AnimatedSection>
+                  </Suspense>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-16">
+            <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">No projects found in this category.</p>
+            <Button
+              variant="outline"
+              onClick={() => setActiveCategory("All")}
+              className="rounded-md"
+            >
+              Show all projects
+            </Button>
+          </div>
+        )}
+
+        {/* Pre-Footer Section */}
+        <section className="w-full py-16">
+          <Suspense
+            fallback={
+              <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+            }
           >
-            Say hello
-          </Button>
-        </div>
-      </section> */}
-      <PreFooter></PreFooter>
+            <PreFooter />
+          </Suspense>
+        </section>
 
-      {/* Footer */}
-      <footer className="w-full max-w-3xl px-4 py-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
-        <p>© {new Date().getFullYear()} Habib Lee Pla. All rights reserved.</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <Link href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-            Instagram
-          </Link>
-          <Link href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-            Dribbble
-          </Link>
-          <Link href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-            LinkedIn
-          </Link>
-        </div>
-      </footer>
-    </main>
-  )
+        {/* Lightbox Modal */}
+        {selectedImage && (
+          <div
+            ref={modalRef}
+            className="fixed inset-0 bg-black z-50 flex items-center justify-center outline-none"
+            onClick={closeLightbox}
+            onKeyDown={(e) => e.key === 'Escape' && closeLightbox()}
+            tabIndex={0}
+            aria-modal="true"
+            aria-labelledby="lightbox-title"
+            role="dialog"
+          >
+            <div className="relative w-full h-full flex flex-col items-center justify-center">
+              <button
+                className="absolute top-4 right-4 bg-black/50 rounded-full p-2 text-white z-10 hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeLightbox();
+                }}
+                aria-label="Close lightbox"
+              >
+                <X className="h-6 w-6" />
+              </button>
+
+              {/* Zoom Controls */}
+              <div className="absolute top-4 left-4 flex gap-2 z-10">
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomIn();
+                  }}
+                  aria-label="Zoom in"
+                >
+                  <ZoomIn className="h-6 w-6" />
+                </button>
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomOut();
+                  }}
+                  aria-label="Zoom out"
+                >
+                  <ZoomOut className="h-6 w-6" />
+                </button>
+                <button
+                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetZoom();
+                  }}
+                  aria-label="Reset zoom"
+                >
+                  <RotateCcw className="h-6 w-6" />
+                </button>
+                <div className="bg-black/50 rounded-full px-3 flex items-center text-white">
+                  {Math.round(zoomLevel * 100)}%
+                </div>
+              </div>
+
+              {/* Previous/Next buttons */}
+              {selectedIndex > 0 && (
+                <button
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToPrevImage();
+                  }}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+              )}
+              
+              {selectedIndex < filteredProjects.length - 1 && (
+                <button
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToNextImage();
+                  }}
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              )}
+
+              <div 
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
+                <img
+                  ref={imageRef}
+                  src={selectedImage}
+                  alt={selectedTitle}
+                  className="max-w-full max-h-full object-contain transition-transform duration-200"
+                  style={{
+                    transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
+                    cursor: zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+
+              <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
+                <h3 id="lightbox-title" className="text-lg font-medium">{selectedTitle}</h3>
+                <p className="text-sm text-gray-300">Image {selectedIndex + 1} of {filteredProjects.length}</p>
+                <div className="text-xs text-gray-400 mt-1">
+                  Use arrow keys to navigate • Press ESC to close • +/- to zoom • 0 to reset zoom
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    </>
+  );
 }
