@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="portfolio-theme"
         >
-          <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+          <div className="min-h-screen bg-[#E1EDED] dark:bg-black text-gray-900 dark:text-gray-100">
             <Suspense
               fallback={
                 <div className="w-full fixed top-0 z-50 py-4">

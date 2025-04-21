@@ -125,7 +125,7 @@ function ContactForm() {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center mt-10">
+      <main className="flex min-h-screen flex-col items-center pt-10">
         {/* Hero Section */}
         <section className="w-full max-w-3xl px-4 py-8 mt-8">
           <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">Contact</h1>

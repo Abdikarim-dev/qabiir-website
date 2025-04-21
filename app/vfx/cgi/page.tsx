@@ -1,153 +1,159 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Wand2 } from "lucide-react"
-import AnimatedSection from "@/components/animated-section"
+"use client";
+
+import { Suspense, useState, useMemo } from "react";
+import { Wand2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import CloudinaryVideoWrapper from "@/app/3d/animation/cloudinary-video-wrapper";
+import AnimatedSection from "@/components/animated-section";
+import PreFooter from "@/components/pre-footer";
 
 export default function CGIPage() {
+  // Cloud name from environment variable
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+  // CGI projects with video embeds
+  const cgiProjects = [
+    {
+      id: "cgi-1",
+      title: "Bidhaan CGI",
+      description: "Professional product visualization and rendering",
+      cloudinaryId: "Bidhaann_yjdpso",
+      thumbnail: "/images/bidhaan.png",
+    },
+    {
+      id: "cgi-2",
+      title: "My Perfumes Showcase",
+      description: "Luxury perfume bottle visualization",
+      cloudinaryId: "My_Perfumes_1_sotl8a",
+      thumbnail: "/images/perfumes.png",
+    },
+    {
+      id: "cgi-3",
+      title: "Abu Walad CGI",
+      category: "Product Animation",
+      description: "Dynamic product showcase animation",
+      cloudinaryId: "Cgi_Abu_Walad_rc9jzr",
+      thumbnail: "/images/abu-walad.png",
+    },
+    {
+      id: "cgi-4",
+      title: "Banner Unroll Simulation",
+      category: "VFX Simulation",
+      description: "Advertising banner physics simulation",
+      cloudinaryId: "Cgi_Advertising_Banner_Unroll_Simulation_fz0luo",
+      thumbnail: "/images/banner.png",
+    },
+    {
+      id: "cgi-5",
+      title: "Wara VFX Advertisement",
+      category: "Visual Effects",
+      description: "Commercial visual effects showcase",
+      cloudinaryId: "Wara_Vfx_Ads_fdqvqp",
+      thumbnail: "/images/wara.png",
+    },
+    {
+      id: "cgi-6",
+      title: "My Bank VFX",
+      category: "Financial Services",
+      description: "Banking service visualization",
+      cloudinaryId: "My_Bank_l8n0sp",
+      thumbnail: "/images/mybank.png",
+    },
+    {
+      id: "cgi-7",
+      title: "Sarah CGI Production",
+      category: "Product Animation",
+      description: "Product showcase and animation",
+      cloudinaryId: "Sarah_Cgi_1_lyc8un",
+      thumbnail: "/images/sarah.png",
+    },
+    {
+      id: "cgi-8",
+      title: "Premier Bank Visualization",
+      category: "Financial Services",
+      description: "Banking service animation",
+      cloudinaryId: "Premier_Bank_Video_occ1cd",
+      thumbnail: "/images/premier-bank.png",
+    },
+    {
+      id: "cgi-9",
+      title: "Cadani Shoes CGI",
+      category: "Product Visualization",
+      description: "Footwear product visualization",
+      cloudinaryId: "Cadani_Shoes_h2va70",
+      thumbnail: "/images/cadani.png",
+    },
+  ];
+
+  // Generate Cloudinary thumbnail URL
+  const getCloudinaryThumbnail = (publicId: string) => {
+    return `https://res.cloudinary.com/${cloudName}/video/upload/q_auto,f_jpg,so_0/${publicId}`;
+  };
+
   return (
-    <main className="min-h-screen pt-24 pb-12">
-      {/* Hero Section */}
-      <section className="w-full max-w-4xl mx-auto px-4 py-8">
-        <AnimatedSection animation="slide-up" className="flex flex-col items-center mb-12">
+    <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
+      <section className="w-full py-8">
+        <div className="flex flex-col items-center mb-12">
           <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-4">
             <Wand2 className="h-8 w-8 text-blue-500" />
           </div>
-          <h1 className="text-4xl font-bold text-center mb-4">Visual Effects & Simulations</h1>
+          <h1 className="text-4xl font-bold text-center mb-4">Visual Effects & CGI</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-2xl">
-            Creating stunning visual effects and realistic simulations that bring your projects to life with impact and
-            realism.
+            Creating stunning visual effects and realistic simulations that bring your projects to life with impact and realism.
           </p>
-        </AnimatedSection>
+        </div>
 
-        {/* Featured Project */}
-        <AnimatedSection animation="fade-in" className="mb-16">
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-            <Image src="/images/fx-bg.jpg" alt="VFX Demo Reel" fill className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-white mb-2">FX Demo Reel</h2>
-                <p className="text-gray-300 mb-4">
-                  A showcase of my latest visual effects work including particle systems, fluid simulations, and
-                  destruction sequences.
-                </p>
-                <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white">Watch Demo Reel</Button>
-              </div>
+        {/* Featured CGI */}
+        <div className="mb-16">
+          <Suspense
+            fallback={
+              <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+            }
+          >
+            <div className="w-full max-w-2xl mx-auto">
+              <CloudinaryVideoWrapper
+                publicId={cgiProjects[0].cloudinaryId}
+                className="w-full aspect-[16/9] rounded-lg overflow-hidden"
+                controls={true}
+                autoPlay={false}
+                loop={true}
+                muted={true}
+                poster={getCloudinaryThumbnail(cgiProjects[0].cloudinaryId)}
+              />
             </div>
-          </div>
-        </AnimatedSection>
+          </Suspense>
+        </div>
 
-        {/* Services Grid */}
-        <AnimatedSection animation="slide-up" className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">VFX Services</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-bold mb-3">Particle Systems</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                From subtle dust and smoke to explosive fire and magic effects, I create custom particle systems that
-                add depth and realism to your scenes.
-              </p>
+        {/* CGI Projects Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
+          {cgiProjects.slice(1).map((project, index) => (
+            <div
+              key={project.id}
+              className="bg-transparent rounded-lg overflow-hidden shadow-md group"
+            >
+              <AnimatedSection
+                animation="slide-up"
+                delay={100 * index}
+                className="h-full"
+              >
+                <div className="relative aspect-[9/16] max-w-md mx-auto">
+                  <CloudinaryVideoWrapper
+                    publicId={project.cloudinaryId}
+                    className="w-full h-full object-cover rounded-lg"
+                    controls={true}
+                    autoPlay={false}
+                    loop={true}
+                    muted={true}
+                    poster={getCloudinaryThumbnail(project.cloudinaryId)}
+                  />
+                </div>
+              </AnimatedSection>
             </div>
-
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-bold mb-3">Fluid Simulations</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Realistic water, smoke, fire, and other fluid dynamics simulations that behave naturally and integrate
-                seamlessly with your environment.
-              </p>
-            </div>
-
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-bold mb-3">Destruction & Physics</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Dynamic destruction sequences and physics-based animations that add impact and excitement to your
-                projects.
-              </p>
-            </div>
-
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-bold mb-3">Environment Effects</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Weather effects, atmospheric conditions, and environmental elements that enhance the mood and realism of
-                your scenes.
-              </p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* Process Section */}
-        <AnimatedSection animation="slide-up" className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">My VFX Process</h2>
-
-          <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                <span className="font-bold text-blue-500">01</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Concept & Planning</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  I start by understanding your vision and requirements, then plan the technical approach to achieve the
-                  desired visual effects.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                <span className="font-bold text-blue-500">02</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Simulation Setup</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  I set up the simulation parameters, create custom solvers if needed, and establish the foundation for
-                  the effects.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                <span className="font-bold text-blue-500">03</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Iteration & Refinement</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Through multiple iterations, I refine the simulations to achieve the perfect look, behavior, and
-                  integration with your scene.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                <span className="font-bold text-blue-500">04</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Rendering & Compositing</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  I render the final effects with proper lighting and shading, then composite them into your scene for a
-                  seamless integration.
-                </p>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* CTA Section */}
-        <AnimatedSection animation="slide-up" className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to add stunning visual effects to your project?</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-            Let's discuss how I can help bring your vision to life with professional VFX that elevates your project.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white">Get a Quote</Button>
-            <Button variant="outline" className="rounded-full">
-              View Portfolio
-            </Button>
-          </div>
-        </AnimatedSection>
+          ))}
+        </div>
       </section>
+
+      <PreFooter />
     </main>
-  )
+  );
 }
