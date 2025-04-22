@@ -9,15 +9,8 @@ const careerData = [
     initial: "Q",
     position: "CEO and Founder",
     period: "",
+    logo:"/images/qabiir-logo.png",
     description: "As the CEO of Qabiir Global, I lead the vision, strategy, and growth of a creative agency focused on branding, 3D design, and digital media. I oversee operations, client relationships, and creative direction to ensure high-quality, impactful results. My leadership combines business strategy with design thinking to deliver innovative solutions for brands and organizations. At Qabiir Global, we help clients transform ideas into powerful visual experiences that drive success."
-  },
-  {
-    id: 2,
-    company: "EasyBiz Agency",
-    initial: "E",
-    position: "Senior Brand Designer & Design Partner",
-    period: "From Oct 2022 - present",
-    description: "As a Senior Designer, I lead multiple branding projects, create visual identity design, create production-ready UI/UX designs, and develop marketing materials and presentations slides and pitch decks."
   },
   {
     id: 3,
@@ -25,6 +18,7 @@ const careerData = [
     initial: "D",
     position: "Head of Digital Media",
     period: "From Mar 2024 - April 2025",
+    logo:"/images/dhalinta-logo.jpg",
     description: "As the Head of Digital Media at Dhalinta Media, I lead the strategy and execution of all digital content across platforms. I oversee content creation, social media campaigns, and digital branding to ensure strong online engagement. My role includes managing creative teams, setting visual direction, and analyzing performance for continuous improvement."
   },
   {
@@ -33,6 +27,7 @@ const careerData = [
     initial: "W",
     position: "Creative Designer",
     period: "From Feb 2023 - May 2024",
+    logo:"/images/wazaarada-logo.jpg",
     description: "As a Creative Designer at the Ministry of Education, I developed visual content for national campaigns and educational programs as online. I crafted branding materials, official presentations, and promotional assets for print and digital use. My designs supported communication strategies across departments and public initiatives."
   },
   {
@@ -41,6 +36,7 @@ const careerData = [
     initial: "D",
     position: "Creative Designer",
     period: "From Aug 2023 - Jan 2024",
+    logo:"/images/deero-logo.jpg",
     description: "As a Creative Designer at Deero Advert, I specialized in crafting brand visuals, marketing materials, and social media content for diverse clients. I led the design of campaigns that balanced creativity with strategy, enhancing brand visibility and engagement. My role involved translating client goals into compelling visuals across digital and print platforms."
   },
   {
@@ -49,6 +45,7 @@ const careerData = [
     initial: "T",
     position: "Creative Designer",
     period: "From Jun 2023 - Dec 2024",
+    logo:"/images/dhalinta-logo.jpg",
     description: "As a Creative Designer at Tik Solution, I create tailored visual content that supports clients' digital marketing and branding goals. My work includes designing logos, social media assets, and campaign visuals that resonate with target audiences. I collaborate with the marketing and development teams to ensure cohesive visual communication across platforms."
   },
   {
@@ -57,6 +54,7 @@ const careerData = [
     initial: "S",
     position: "3D Animator and Visuals Product",
     period: "",
+    logo:"/images/sarah-logo.jpg",
     description: "As a 3D Animator and Visuals Product Designer at Sarah Cosmetics, I specialize in creating realistic 3D product visualizations for marketing and advertising. I develop high-quality 3D animations that showcase the features and aesthetics of cosmetic products. My role includes working closely with the marketing team to create visually engaging content for digital platforms and promotional materials."
   }
 ];
@@ -74,9 +72,9 @@ export default function About() {
             alt="Mohamed Abdikhabir"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute bottom-4 left-4 text-white">
+          <div className="absolute bottom-4 left-4 text-white text-opacity-75">
             <h2 className="text-lg font-medium mb-1">Mohamed Abdikhabir</h2>
-            <div className="h-[2px] w-16 bg-white"></div>
+            <div className="h-[2px] w-16 bg-white bg-opacity-75"></div>
           </div>
         </div>
       </div>
@@ -162,10 +160,20 @@ export default function About() {
             {careerData.map((career) => (
               <div key={career.id} className="bg-gray-100 dark:bg-gray-900 rounded-lg p-6">
                 <div className="flex flex-col items- gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
-                    <span className="text-white text-lg font-semibold">
-                      {career.initial}
-                    </span>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center overflow-hidden">
+                    {career.logo ? (
+                      <Image
+                        src={career.logo}
+                        alt={`${career.company} logo`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-white text-lg font-semibold">
+                        {career.initial}
+                      </span>
+                    )}
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-white text-lg">
