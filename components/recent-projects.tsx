@@ -237,7 +237,7 @@ export default function RecentProjects() {
 
       {/* View all work button */}
       <div className="flex justify-center">
-        <Link href="/3d">
+        <Link href="/3d/visualization">
           <Button
             variant="outline"
             className="rounded-full border-red-500 text-gray-900 dark:text-white hover:bg-red-500/10"
