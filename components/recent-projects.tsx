@@ -33,7 +33,7 @@ export default function RecentProjects() {
     {
       id: "project1",
       title: "Dhalinta Brand",
-      subtitle: "3D Product Visualization & Design",
+      subtitle: "Comprehensive Brand Showcase",
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
       link: "/branding/brand-1",
@@ -51,8 +51,8 @@ export default function RecentProjects() {
     },
     {
       id: "project3",
-      title: "February Collection",
-      subtitle: "3D Product Visualization & Design",
+      title: "Marketing & Poster Designs",
+      subtitle: "Visuals for brands, campaigns, and promotions",
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
       link: "/designs",
