@@ -45,7 +45,7 @@ const careerData = [
     initial: "T",
     position: "Creative Designer",
     period: "From Jun 2023 - Dec 2024",
-    logo:"/images/dhalinta-logo.jpg",
+    logo:"/images/tik-logo.jpg",
     description: "As a Creative Designer at Tik Solution, I create tailored visual content that supports clients' digital marketing and branding goals. My work includes designing logos, social media assets, and campaign visuals that resonate with target audiences. I collaborate with the marketing and development teams to ensure cohesive visual communication across platforms."
   },
   {
@@ -133,7 +133,7 @@ export default function About() {
 
       {/* Career Section */}
       <section className="w-full max-w-3xl px-4 py-8">
-        <div className="sticky top-12 z-10 py-4">
+        <div className="md:sticky top-12 z-10 py-4">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
               <span className="text-gray-900 dark:text-white text-xs">📋</span>
@@ -144,7 +144,7 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4">
+            <div className="space-y-4 md:block hidden">
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 I've successfully collaborated with startups across diverse
                 sectors including Qabiir Global, Wasaradda waxbarashada, Deero
@@ -157,7 +157,16 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div></div> {/* Empty div to maintain grid layout */}
+          <div className="md:hidden block space-y-4 mb-8">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              I've successfully collaborated with startups across diverse
+              sectors including Qabiir Global, Wasaradda waxbarashada, Deero
+              Advert, Dhalinta Media, Sarah Cosmetics, Tik Soultion and beyond
+              to elevate their brand presence and craft meaningful, memorable
+              design experiences that connect with their audiences.
+            </p>
+          </div>
+          <div className="hidden md:block"></div> {/* Empty div for desktop layout */}
           
           {/* Career Timeline */}
           <div className="space-y-8">
