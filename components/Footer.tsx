@@ -6,22 +6,28 @@ export default function Footer() {
       <p>© {new Date().getFullYear()} Qabiir. All rights reserved.</p>
       <div className="flex justify-center gap-4 mt-4">
         <Link
-          href="#"
+          href="https://www.instagram.com/qabiir.art/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
         >
           Instagram
         </Link>
         <Link
-          href="#"
+          href="https://www.facebook.com/QabiirGlobal"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        >
+          Facebook
+        </Link>
+        <Link
+          href="https://www.linkedin.com/in/qabiir/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
         >
           LinkedIn
-        </Link>
-        <Link
-          href="#"
-          className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-        >
-          ArtStation
         </Link>
       </div>
     </footer>

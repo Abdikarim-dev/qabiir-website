@@ -53,8 +53,8 @@ export default function Home() {
             </p>
 
             <div className="mt-3">
-              <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6">
-                Let's work together
+              <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6" asChild>
+                <Link href="/contact">Let's work together</Link>
               </Button>
             </div>
           </div>
@@ -64,22 +64,28 @@ export default function Home() {
       {/* Social Media Links */}
       <div className="w-full max-w-md md:max-w-2xl px-4 flex justify-between border-t border-b border-gray-50 dark:border-gray-800 py-4">
         <Link
-          href="https://instagram.com"
+          href="https://www.instagram.com/qabiir.art/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
         >
           Instagram
         </Link>
         <Link
-          href="https://linkedin.com"
+          href="https://www.facebook.com/QabiirGlobal"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        >
+          Facebook
+        </Link>
+        <Link
+          href="https://www.linkedin.com/in/qabiir/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
         >
           LinkedIn
-        </Link>
-        <Link
-          href="https://artstation.com"
-          className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-        >
-          ArtStation
         </Link>
       </div>
 
@@ -118,7 +124,7 @@ export default function Home() {
               className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden flex items-center justify-center"
             >
               {/* Clear background image */}
-              <div className="absolute inset-0 bg-[url('/images/fx-bg.jpg')] bg-center bg-cover scale-105"></div>
+              <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dofv7shih/image/upload/v1744803770/tijabo-24_ixzocc.png')] bg-center bg-cover scale-105"></div>
 
               {/* Blurred black overlay */}
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
@@ -168,12 +174,12 @@ export default function Home() {
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                FX & Simulation
+                Brand Design
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                I specialize in creating realistic visual effects including
-                fluid simulations, particle systems, destruction sequences, and
-                natural phenomena that add impact and realism to your projects.
+                Every brand has a voice, a vision, and a story. I translate that
+                into a visual language that’s both strategic and stunning
+                helping your audience see you, feel you, and remember you.
               </p>
             </AnimatedSection>
             <AnimatedSection
@@ -181,10 +187,10 @@ export default function Home() {
               className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden flex items-center justify-center"
             >
               {/* Background image */}
-              <div className="absolute inset-0 bg-[url('/images/fx-bg.jpg')] bg-center bg-cover scale-105"></div>
+              <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png')] bg-center bg-cover scale-105"></div>
 
               {/* Blurred black overlay */}
-              <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+              <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
               {/* Foreground content */}
               <div className="relative z-10 w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center">
@@ -202,7 +208,7 @@ export default function Home() {
               className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden flex items-center justify-center order-1 md:order-none"
             >
               {/* Background image */}
-              <div className="absolute inset-0 bg-[url('/images/animation-bg.jpg')] bg-center bg-cover scale-105"></div>
+              <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dofv7shih/image/upload/v1745329230/Wakiil_brand-03_scfqms.png')] bg-center bg-cover scale-105"></div>
 
               {/* Blurred black overlay */}
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
@@ -215,20 +221,22 @@ export default function Home() {
 
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                Concept Development
+                Logo Design
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                I help transform your ideas into visual concepts, working
-                closely with you to develop the look, feel, and movement that
-                best represents your brand and message.
+                A logo is more than just a mark — it’s the foundation of your
+                brand’s visual identity. I create logos with intention, clarity,
+                and meaning helping you establish trust, spark recognition, and
+                shape the way people experience your brand from the
+                very first glance.
               </p>
             </AnimatedSection>
           </div>
         </div>
 
         <div className="flex justify-center mt-8">
-          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white">
-            Get a project quote
+          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
+            <Link href="/contact">Get a project quote</Link>
           </Button>
         </div>
       </section>
@@ -336,8 +344,8 @@ export default function Home() {
           delay={600}
           className="flex justify-center mt-8"
         >
-          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white">
-            Get a project quote
+          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
+            <Link href="/contact">Get a project quote</Link>
           </Button>
         </AnimatedSection>
       </section>
@@ -505,7 +513,7 @@ export default function Home() {
       </section> */}
       <PreFooter />
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </main>
   );
 }

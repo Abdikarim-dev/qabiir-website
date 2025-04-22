@@ -1,68 +1,70 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Folder } from "lucide-react"
-import { useInView } from "react-intersection-observer"
-import ImageSkeleton from "@/components/image-skeleton"
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Folder } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import ImageSkeleton from "@/components/image-skeleton";
 
 interface Project {
-  id: string
-  title: string
-  subtitle: string
-  imageUrl: string
-  link: string
-  featured?: boolean
+  id: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  link: string;
+  featured?: boolean;
 }
 
 export default function RecentProjects() {
-  const [isLargeScreen, setIsLargeScreen] = useState(false)
-  // Remove triggerOnce to allow animation to happen on every scroll
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const { ref, inView } = useInView({
-    threshold: 0.5, // Trigger when section is halfway visible
-    triggerOnce: false, // Allow triggering multiple times
-  })
+    threshold: 0.5,
+    triggerOnce: false,
+  });
 
-  // Sample project data
+  // Updated project data with new Cloudinary images
   const projects: Project[] = [
     {
       id: "project1",
-      title: "042 Fashion",
-      subtitle: "Brand Strategy, Brand Design, & Visual Marketing Design",
-      imageUrl: "/images/fashion.webp",
-      link: "/3d/product-animation",
+      title: "Beverage Collection",
+      subtitle: "3D Product Visualization & Design",
+      imageUrl:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744804111/tijabo-18_bknbvh.png",
+      link: "/3d/visualization",
     },
     {
       id: "project2",
-      title: "Auto Works",
-      subtitle: "Brand Strategy, Brand Design, & Visual Marketing Design",
-      imageUrl: "/images/auto.webp",
-      link: "/3d/auto-works",
+      title: "Premium Design",
+      subtitle: "3D Product Visualization & Design",
+      imageUrl:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
+      link: "/3d/visualization",
       featured: true,
     },
     {
       id: "project3",
-      title: "GymFlex",
-      subtitle: "Brand Strategy, Brand Design, & Visual Marketing Design",
-      imageUrl: "/images/gym.webp",
-      link: "/3d/fx-showreel",
+      title: "February Collection",
+      subtitle: "3D Product Visualization & Design",
+      imageUrl:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
+      link: "/3d/visualization",
     },
-  ]
+  ];
 
   // Check if screen is large enough for animations
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024)
-    }
+      setIsLargeScreen(window.innerWidth >= 1024);
+    };
 
-    checkScreenSize()
-    window.addEventListener("resize", checkScreenSize)
-    return () => window.removeEventListener("resize", checkScreenSize)
-  }, [])
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
     <section className="w-full max-w-md lg:max-w-5xl mx-auto px-4 py-16">
@@ -71,7 +73,9 @@ export default function RecentProjects() {
         <div className="w-16 h-16 rounded-full bg-gray-900 dark:bg-gray-900 flex items-center justify-center mb-4">
           <Folder className="h-8 w-8 text-red-500" />
         </div>
-        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Recent Projects</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
+          Recent Projects
+        </h2>
       </div>
 
       {/* Project Cards Container */}
@@ -87,12 +91,17 @@ export default function RecentProjects() {
           >
             {projects.map((project, index) => {
               // Determine card position based on index
-              const isLeft = index === 0
-              const isCenter = index === 1
-              const isRight = index === 2
+              const isLeft = index === 0;
+              const isCenter = index === 1;
+              const isRight = index === 2;
 
               // Get card styles safely
-              const cardStyles = getCardStylesSafe(isLeft, isCenter, isRight, inView)
+              const cardStyles = getCardStylesSafe(
+                isLeft,
+                isCenter,
+                isRight,
+                inView
+              );
 
               return (
                 <Link
@@ -108,12 +117,14 @@ export default function RecentProjects() {
                     className={`
                       relative w-full h-full rounded-lg overflow-hidden
                       transform transition-all duration-1000
-                      ${isCenter ? "shadow-xl" : ""}
+                      ${isCenter ? "shadow-xl" : ""} 
                       bg-gray-200 dark:bg-gray-800
                     `}
                   >
                     {/* Project image */}
-                    <div className="absolute inset-0 w-full h-full">
+                    <div
+                      className={`absolute inset-0 w-full h-full`}
+                    >
                       {project.imageUrl ? (
                         <Image
                           src={project.imageUrl || "/placeholder.svg"}
@@ -130,8 +141,12 @@ export default function RecentProjects() {
 
                     {/* Project info overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <h3 className="text-lg font-medium text-white">{project.title}</h3>
-                      <p className="text-xs text-gray-300">{project.subtitle}</p>
+                      <h3 className="text-lg font-medium text-white">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-gray-300">
+                        {project.subtitle}
+                      </p>
                     </div>
 
                     {/* Featured badge */}
@@ -144,7 +159,7 @@ export default function RecentProjects() {
                     )}
                   </div>
                 </Link>
-              )
+              );
             })}
           </div>
         </div>
@@ -181,8 +196,12 @@ export default function RecentProjects() {
               </div>
 
               <div className="p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">{project.title}</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{project.subtitle}</p>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                  {project.title}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {project.subtitle}
+                </p>
               </div>
             </Link>
           ))}
@@ -201,7 +220,7 @@ export default function RecentProjects() {
         </Link>
       </div>
     </section>
-  )
+  );
 }
 
 // Helper function to get card styles based on position and animation state
@@ -210,50 +229,50 @@ function getCardStylesSafe(
   isLeft: boolean,
   isCenter: boolean,
   isRight: boolean,
-  isInView: boolean,
+  isInView: boolean
 ): React.CSSProperties {
   const styles: React.CSSProperties = {
     transformStyle: "preserve-3d",
     zIndex: isCenter ? 30 : 20,
-  }
+  };
 
   // Initial state (stacked together) - when not in view
   if (!isInView) {
     if (isLeft) {
-      styles.left = "45%"
-      styles.top = "10%"
-      styles.transform = "translateX(-50%) rotateY(15deg) scale(0.85)"
-      styles.opacity = 0.8
+      styles.left = "45%";
+      styles.top = "10%";
+      styles.transform = "translateX(-50%) rotateY(15deg) scale(0.85)";
+      styles.opacity = 0.8;
     } else if (isCenter) {
-      styles.left = "50%"
-      styles.top = "0%"
-      styles.transform = "translateX(-50%) scale(0.95)"
-      styles.opacity = 1
+      styles.left = "50%";
+      styles.top = "0%";
+      styles.transform = "translateX(-50%) scale(0.95)";
+      styles.opacity = 1;
     } else if (isRight) {
-      styles.left = "55%"
-      styles.top = "10%"
-      styles.transform = "translateX(-50%) rotateY(-15deg) scale(0.85)"
-      styles.opacity = 0.8
+      styles.left = "55%";
+      styles.top = "10%";
+      styles.transform = "translateX(-50%) rotateY(-15deg) scale(0.85)";
+      styles.opacity = 0.8;
     }
   } else {
     // Animated state (spread out) - when in view
     if (isLeft) {
-      styles.left = "25%"
-      styles.top = "5%"
-      styles.transform = "translateX(-50%) rotateY(15deg) scale(0.9)"
-      styles.opacity = 0.9
+      styles.left = "25%";
+      styles.top = "5%";
+      styles.transform = "translateX(-50%) rotateY(15deg) scale(0.9)";
+      styles.opacity = 0.9;
     } else if (isCenter) {
-      styles.left = "50%"
-      styles.top = "0%"
-      styles.transform = "translateX(-50%) scale(1)"
-      styles.opacity = 1
+      styles.left = "50%";
+      styles.top = "0%";
+      styles.transform = "translateX(-50%) scale(1)";
+      styles.opacity = 1;
     } else if (isRight) {
-      styles.left = "75%"
-      styles.top = "5%"
-      styles.transform = "translateX(-50%) rotateY(-15deg) scale(0.9)"
-      styles.opacity = 0.9
+      styles.left = "75%";
+      styles.top = "5%";
+      styles.transform = "translateX(-50%) rotateY(-15deg) scale(0.9)";
+      styles.opacity = 0.9;
     }
   }
 
-  return styles
+  return styles;
 }
