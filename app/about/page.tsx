@@ -133,28 +133,32 @@ export default function About() {
 
       {/* Career Section */}
       <section className="w-full max-w-3xl px-4 py-8">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-            <span className="text-gray-900 dark:text-white text-xs">📋</span>
+        <div className="sticky top-12 z-10 py-4">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+              <span className="text-gray-900 dark:text-white text-xs">📋</span>
+            </div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              My career so far
+            </h2>
           </div>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            My career so far
-          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                I've successfully collaborated with startups across diverse
+                sectors including Qabiir Global, Wasaradda waxbarashada, Deero
+                Advert, Dhalinta Media, Sarah Cosmetics, Tik Soultion and beyond
+                to elevate their brand presence and craft meaningful, memorable
+                design experiences that connect with their audiences.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              I’ve successfully collaborated with startups across diverse
-              sectors including Qabiir Global, Wasaradda waxbarashada, Deero
-              Advert, Dhalinta Media, Sarah Cosmetics, Tik Soultion and beyond
-              to elevate their brand presence and craft meaningful, memorable
-              design experiences that connect with their audiences.
-            </p>
-
-            {/* <Button className="bg-purple-600 hover:bg-purple-700 rounded-full text-white">View CV online</Button> */}
-          </div>
-
+          <div></div> {/* Empty div to maintain grid layout */}
+          
           {/* Career Timeline */}
           <div className="space-y-8">
             {careerData.map((career) => (
