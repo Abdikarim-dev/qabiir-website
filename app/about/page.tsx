@@ -7,57 +7,55 @@ export default function About() {
     <main className="flex min-h-screen flex-col items-center pt-4">
       {/* Hero Image */}
       <div className="w-full max-w-3xl px-4 py-8 mt-8">
-        <div className="w-full h-[480px] bg-gradient-to-r from-purple-600 via-red-500 to-orange-500 rounded-xl overflow-hidden">
+        <div className="w-full h-[480px] bg-gradient-to-r from-purple-600 via-red-500 to-orange-500 rounded-xl overflow-hidden relative">
           <Image
             src="/images/profile.png?height=480&width=768"
             width={768}
             height={480}
-            alt="Habib Lee Pla"
+            alt="Mohamed Abdikhabir"
             className="w-full h-full object-cover object-center"
           />
+          <div className="absolute bottom-4 left-4 text-white">
+            <h2 className="text-lg font-medium mb-1">Mohamed Abdikhabir</h2>
+            <div className="h-[2px] w-16 bg-white"></div>
+          </div>
         </div>
       </div>
 
       {/* About Section */}
       <section className="w-full max-w-3xl px-4 py-8">
         <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-          Your Partner in Bringing Your Brand's Vision to Life
+        From Concept to Creation: Bringing Your Vision to Life
         </h1>
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">Behind every design is a designer with a vision.</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Every design tells a story, and behind every story is a master of the craft.</p>
 
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              I'm <strong>Habib Lee Pla</strong>, a professional designer dedicated to transforming functionality and
-              ideas.
+              I am <strong>Qabiir</strong> — a designer and 3D design expert, passionate about transforming concepts into captivating visual experiences.
             </p>
 
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              I believe that great design is more than just a logo; it's about creating a visual language that's both
-              adaptive and distinct, providing clarity through simplification, but also emotive and functional.
+              With years of experiences, I've developed my ability to bring new concepts to life, whether using classic design techniques or advanced 3D modelling and animation.
             </p>
 
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              As a strategist, I partner with companies and organizations to develop and implement effective branding
-              solutions and design systems that help them to establish a strong and unified presence.
+              Partnering with brands and organizations, I craft immersive visual narratives that elevate their identity, creating a strong presence across both digital and physical platforms.
             </p>
           </div>
 
           <div className="space-y-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              I'm also a Public Speaker and Educator, an Adobe Certified Creative Cloud and a Certified Brand
-              Specialist.
+              My work combines creativity and technical expertise, ensuring that each design is both visually appealing and functional.
             </p>
 
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Ultimately, I take pleasure in connecting my expertise, ideas, and creativity to design solutions that are
-              not only visually appealing but also practical, accessible, cost-effective, and solve real-world problems.
+              I prioritise producing solutions that are not just visually appealing, but also functional and impactful.
             </p>
 
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              So, here is the interesting part: I'm helping brands to stand out by creating designs that are visually
-              distinct and memorable.
+              Through my expertise in both traditional design and 3D visualization, I help brands create memorable and distinctive visual experiences that truly stand out.
             </p>
           </div>
         </div>
@@ -179,7 +177,7 @@ export default function About() {
 
       {/* Footer */}
       <footer className="w-full max-w-3xl px-4 py-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
-        <p>© {new Date().getFullYear()} Habib Lee Pla. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Mohamed Abdikhabir. All rights reserved.</p>
         <div className="flex justify-center gap-4 mt-4">
           <Link href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
             Instagram
