@@ -17,12 +17,13 @@ interface Project {
   imageUrl: string;
   link: string;
   featured?: boolean;
+  tags:  '3D' | 'Design' | 'Brand';
 }
 
 export default function RecentProjects() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const { ref, inView } = useInView({
-    threshold: 0.5,
+    threshold: 0.3, // Changed from 0.5 to 0.3 (30%)
     triggerOnce: false,
   });
 
@@ -35,6 +36,7 @@ export default function RecentProjects() {
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804111/tijabo-18_bknbvh.png",
       link: "/3d/visualization",
+      tags: "3D",
     },
     {
       id: "project2",
@@ -42,8 +44,9 @@ export default function RecentProjects() {
       subtitle: "3D Product Visualization & Design",
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
-      link: "/3d/visualization",
+      link: "/branding/brand-1",
       featured: true,
+      tags:"Brand"
     },
     {
       id: "project3",
@@ -51,7 +54,8 @@ export default function RecentProjects() {
       subtitle: "3D Product Visualization & Design",
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
-      link: "/3d/visualization",
+      link: "/designs",
+      tags:"Design"
     },
   ];
 
@@ -121,6 +125,18 @@ export default function RecentProjects() {
                       bg-gray-200 dark:bg-gray-800
                     `}
                   >
+                    {/* Tags */}
+                    <div className={`absolute top-3 ${index!==2?"left-3":"right-3"} z-10 flex flex-wrap gap-2`}>
+                      
+                        <span
+                          
+                          className={`px-2 py-1 text-xs font-medium backdrop-blur-sm text-white rounded-full ${getTagStyle(project.tags)}`}
+                        >
+                          {project.tags}
+                        </span>
+                    
+                    </div>
+
                     {/* Project image */}
                     <div
                       className={`absolute inset-0 w-full h-full`}
@@ -173,6 +189,16 @@ export default function RecentProjects() {
               className="block rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800 transition-transform hover:scale-105"
             >
               <div className="relative aspect-[4/3]">
+                {/* Tags */}
+                <div className={`absolute top-3 left-3 z-10 flex flex-wrap gap-2`}>  
+                    <span
+                      className={`px-2 py-1 text-xs font-medium backdrop-blur-sm text-white rounded-full ${getTagStyle(project.tags)}`}
+                    >
+                      {project.tags}
+                    </span>
+                </div>
+
+                {/* Project image */}
                 {project.imageUrl ? (
                   <Image
                     src={project.imageUrl || "/placeholder.svg"}
@@ -276,3 +302,17 @@ function getCardStylesSafe(
 
   return styles;
 }
+
+// Function to get tag background color based on category
+const getTagStyle = (category: string) => {
+  switch (category) {
+    case 'service':
+      return 'bg-blue-500/50';
+    case 'type':
+      return 'bg-green-500/50';
+    case 'industry':
+      return 'bg-purple-500/50';
+    default:
+      return 'bg-gray-500/50';
+  }
+};
