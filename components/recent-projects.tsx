@@ -17,7 +17,7 @@ interface Project {
   imageUrl: string;
   link: string;
   featured?: boolean;
-  tags:  '3D' | 'Design' | 'Brand';
+  tags:  '3D VISUALIZATION' | 'DESIGNS' | 'BRAND';
 }
 
 export default function RecentProjects() {
@@ -29,24 +29,25 @@ export default function RecentProjects() {
 
   // Updated project data with new Cloudinary images
   const projects: Project[] = [
+    
     {
       id: "project1",
+      title: "Dhalinta Brand",
+      subtitle: "3D Product Visualization & Design",
+      imageUrl:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
+      link: "/branding/brand-1",
+      featured: true,
+      tags:"BRAND"
+    },
+    {
+      id: "project2",
       title: "Beverage Collection",
       subtitle: "3D Product Visualization & Design",
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804111/tijabo-18_bknbvh.png",
       link: "/3d/visualization",
-      tags: "3D",
-    },
-    {
-      id: "project2",
-      title: "Premium Design",
-      subtitle: "3D Product Visualization & Design",
-      imageUrl:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
-      link: "/branding/brand-1",
-      featured: true,
-      tags:"Brand"
+      tags: "3D VISUALIZATION",
     },
     {
       id: "project3",
@@ -55,7 +56,7 @@ export default function RecentProjects() {
       imageUrl:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
       link: "/designs",
-      tags:"Design"
+      tags:"DESIGNS"
     },
   ];
 
