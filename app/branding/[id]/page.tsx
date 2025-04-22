@@ -28,14 +28,17 @@ export default function SingleBrandProject() {
       id: "brand-1",
       title: "Dhalinta Brand Identity",
       image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260897/Dhalinta_brand-03_lee0l2.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
       gallery: [
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745260907/Dhalinta_brand-02_voty8k.png",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260903/Dhalinta_brand-05_zqedqd.png",
-
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260899/Dhalinta_brand-09_b79ixh.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260897/Dhalinta_brand-03_lee0l2.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745260898/Dhalinta_brand-04_jl80ow.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260903/Dhalinta_brand-05_zqedqd.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745328870/Dhalinta_brand-06_zsrp3a.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745328871/Dhalinta_brand-07_pklqji.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745328862/Dhalinta_brand-08_vjamio.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745260899/Dhalinta_brand-09_b79ixh.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745328884/Dhalinta_brand-10_pwk8wg.jpg",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745260920/Dhalinta_brand-11_v9ppnk.png",
       ],
       description:
@@ -45,12 +48,13 @@ export default function SingleBrandProject() {
       id: "brand-2",
       title: "Gorgor Logo Design",
       image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261091/Gorgor_logo_presentation-21_mmkpme.png",
-      gallery: [
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261464/Gorgor_logo_presentation-17_e62lab.png",
+      gallery: [
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261111/Gorgor_logo_presentation-18_rigjq7.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261086/Gorgor_logo_presentation-19_oz3aq1.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261085/Gorgor_logo_presentation-20_s1cn9q.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261091/Gorgor_logo_presentation-21_mmkpme.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745328768/Gorgor_logo_presentation_ecjjwv.jpg",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261163/Gorgor_logo_presentation-23_fsegwn.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261173/Gorgor_logo_presentation-24_okeir8.png",
       ],
@@ -60,17 +64,34 @@ export default function SingleBrandProject() {
       id: "brand-3",
       title: "Hindis Brand Identity",
       image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745262039/Hindis_Advert_Brand-06_lkyodx.png",
-      gallery: [
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745262306/Hindis_Advert_Brand-05_fz8o5x.png",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261832/Hindis_Advert_Brand-04_t6dkcj.png",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-03_plfexf.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261729/Hindis_Advert_Brand-01_hmge45.png",
+
+      gallery: [
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-02_pcttzn.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-03_plfexf.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261832/Hindis_Advert_Brand-04_t6dkcj.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745262306/Hindis_Advert_Brand-05_fz8o5x.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745262039/Hindis_Advert_Brand-06_lkyodx.png",
       ],
       description:
         "Complete brand identity system for Hindis, including visual guidelines and marketing materials.",
     },
+    {
+      id: "brand-4",
+      title: "Wakiil Brand Identity",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
+      gallery: [
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329229/Wakiil_brand-02_jpmzjg.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329230/Wakiil_brand-03_scfqms.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329323/Wakiil_brand-04_aqmef6.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329308/Wakiil_brand-05_mjqijp.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329294/Wakiil_brand-06_zxvzbx.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329308/Wakiil_brand-07_ychuic.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329302/Wakiil_brand-08_qaymij.jpg"
+      ],
+      description: "Comprehensive brand identity development for Wakiil, showcasing visual elements and brand applications."
+    }
   ];
 
   useEffect(() => {

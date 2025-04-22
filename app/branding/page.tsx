@@ -53,18 +53,23 @@ export default function BrandingPage() {
     {
       id: "brand-1",
       title: "Dhalinta Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745260897/Dhalinta_brand-03_lee0l2.png",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
     },
     {
       id: "brand-2",
       title: "Gorgor Logo Design",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261091/Gorgor_logo_presentation-21_mmkpme.png",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261464/Gorgor_logo_presentation-17_e62lab.png",
     },
     {
       id: "brand-3",
       title: "Hindis Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745262039/Hindis_Advert_Brand-06_lkyodx.png",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261729/Hindis_Advert_Brand-01_hmge45.png",
     },
+    {
+      id: "brand-4",
+      title: "Wakiil Brand Identity",
+      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
+    }
   ];
 
   // Featured project is the first one
