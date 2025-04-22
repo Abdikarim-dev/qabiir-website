@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import PreFooter from "@/components/pre-footer";
+import Footer from "@/components/Footer";
 
 const careerData = [
   {
@@ -9,8 +11,9 @@ const careerData = [
     initial: "Q",
     position: "CEO and Founder",
     period: "",
-    logo:"/images/qabiir-logo.png",
-    description: "As the CEO of Qabiir Global, I lead the vision, strategy, and growth of a creative agency focused on branding, 3D design, and digital media. I oversee operations, client relationships, and creative direction to ensure high-quality, impactful results. My leadership combines business strategy with design thinking to deliver innovative solutions for brands and organizations. At Qabiir Global, we help clients transform ideas into powerful visual experiences that drive success."
+    logo: "/images/qabiir-logo.png",
+    description:
+      "As the CEO of Qabiir Global, I lead the vision, strategy, and growth of a creative agency focused on branding, 3D design, and digital media. I oversee operations, client relationships, and creative direction to ensure high-quality, impactful results. My leadership combines business strategy with design thinking to deliver innovative solutions for brands and organizations. At Qabiir Global, we help clients transform ideas into powerful visual experiences that drive success.",
   },
   {
     id: 3,
@@ -18,8 +21,9 @@ const careerData = [
     initial: "D",
     position: "Head of Digital Media",
     period: "From Mar 2024 - April 2025",
-    logo:"/images/dhalinta-logo.jpg",
-    description: "As the Head of Digital Media at Dhalinta Media, I lead the strategy and execution of all digital content across platforms. I oversee content creation, social media campaigns, and digital branding to ensure strong online engagement. My role includes managing creative teams, setting visual direction, and analyzing performance for continuous improvement."
+    logo: "/images/dhalinta-logo.jpg",
+    description:
+      "As the Head of Digital Media at Dhalinta Media, I lead the strategy and execution of all digital content across platforms. I oversee content creation, social media campaigns, and digital branding to ensure strong online engagement. My role includes managing creative teams, setting visual direction, and analyzing performance for continuous improvement.",
   },
   {
     id: 4,
@@ -27,8 +31,9 @@ const careerData = [
     initial: "W",
     position: "Creative Designer",
     period: "From Feb 2023 - May 2024",
-    logo:"/images/wazaarada-logo.jpg",
-    description: "As a Creative Designer at the Ministry of Education, I developed visual content for national campaigns and educational programs as online. I crafted branding materials, official presentations, and promotional assets for print and digital use. My designs supported communication strategies across departments and public initiatives."
+    logo: "/images/wazaarada-logo.jpg",
+    description:
+      "As a Creative Designer at the Ministry of Education, I developed visual content for national campaigns and educational programs as online. I crafted branding materials, official presentations, and promotional assets for print and digital use. My designs supported communication strategies across departments and public initiatives.",
   },
   {
     id: 5,
@@ -36,8 +41,9 @@ const careerData = [
     initial: "D",
     position: "Creative Designer",
     period: "From Aug 2023 - Jan 2024",
-    logo:"/images/deero-logo.jpg",
-    description: "As a Creative Designer at Deero Advert, I specialized in crafting brand visuals, marketing materials, and social media content for diverse clients. I led the design of campaigns that balanced creativity with strategy, enhancing brand visibility and engagement. My role involved translating client goals into compelling visuals across digital and print platforms."
+    logo: "/images/deero-logo.jpg",
+    description:
+      "As a Creative Designer at Deero Advert, I specialized in crafting brand visuals, marketing materials, and social media content for diverse clients. I led the design of campaigns that balanced creativity with strategy, enhancing brand visibility and engagement. My role involved translating client goals into compelling visuals across digital and print platforms.",
   },
   {
     id: 6,
@@ -45,8 +51,9 @@ const careerData = [
     initial: "T",
     position: "Creative Designer",
     period: "From Jun 2023 - Dec 2024",
-    logo:"/images/tik-logo.jpg",
-    description: "As a Creative Designer at Tik Solution, I create tailored visual content that supports clients' digital marketing and branding goals. My work includes designing logos, social media assets, and campaign visuals that resonate with target audiences. I collaborate with the marketing and development teams to ensure cohesive visual communication across platforms."
+    logo: "/images/tik-logo.jpg",
+    description:
+      "As a Creative Designer at Tik Solution, I create tailored visual content that supports clients' digital marketing and branding goals. My work includes designing logos, social media assets, and campaign visuals that resonate with target audiences. I collaborate with the marketing and development teams to ensure cohesive visual communication across platforms.",
   },
   {
     id: 7,
@@ -54,9 +61,10 @@ const careerData = [
     initial: "S",
     position: "3D Animator and Visuals Product",
     period: "",
-    logo:"/images/sarah-logo.jpg",
-    description: "As a 3D Animator and Visuals Product Designer at Sarah Cosmetics, I specialize in creating realistic 3D product visualizations for marketing and advertising. I develop high-quality 3D animations that showcase the features and aesthetics of cosmetic products. My role includes working closely with the marketing team to create visually engaging content for digital platforms and promotional materials."
-  }
+    logo: "/images/sarah-logo.jpg",
+    description:
+      "As a 3D Animator and Visuals Product Designer at Sarah Cosmetics, I specialize in creating realistic 3D product visualizations for marketing and advertising. I develop high-quality 3D animations that showcase the features and aesthetics of cosmetic products. My role includes working closely with the marketing team to create visually engaging content for digital platforms and promotional materials.",
+  },
 ];
 
 export default function About() {
@@ -135,8 +143,24 @@ export default function About() {
       <section className="w-full max-w-3xl px-4 py-8">
         <div className="md:sticky top-12 z-10 py-4">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-              <span className="text-gray-900 dark:text-white text-xs">📋</span>
+            <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-900 dark:text-white"
+              >
+                <path d="M21 6v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6" />
+                <path d="M9 2h6" />
+                <circle cx="12" cy="10" r="3" />
+                <path d="M12 13v8" />
+              </svg>
             </div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
               My career so far
@@ -166,12 +190,15 @@ export default function About() {
               design experiences that connect with their audiences.
             </p>
           </div>
-          <div className="hidden md:block"></div> {/* Empty div for desktop layout */}
-          
+          <div className="hidden md:block"></div>{" "}
+          {/* Empty div for desktop layout */}
           {/* Career Timeline */}
           <div className="space-y-8">
             {careerData.map((career) => (
-              <div key={career.id} className="bg-gray-100 dark:bg-gray-900 rounded-lg p-6">
+              <div
+                key={career.id}
+                className="bg-gray-100 dark:bg-gray-900 rounded-lg p-6"
+              >
                 <div className="flex flex-col items- gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center overflow-hidden">
                     {career.logo ? (
@@ -214,7 +241,7 @@ export default function About() {
       {/* Awards Section */}
       <section className="w-full max-w-3xl px-4 py-8">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
             <span className="text-gray-900 dark:text-white text-xs">🏆</span>
           </div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -244,9 +271,9 @@ export default function About() {
       </section>
 
       {/* Contact Section */}
-      <section className="w-full max-w-3xl px-4 py-8 mb-12">
+      {/* <section className="w-full max-w-3xl px-4 py-8 mb-12">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
             <span className="text-gray-900 dark:text-white text-xs">📞</span>
           </div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -277,34 +304,11 @@ export default function About() {
             View FAQs
           </Button>
         </div>
-      </section>
+      </section> */}
+      <PreFooter />
 
       {/* Footer */}
-      <footer className="w-full max-w-3xl px-4 py-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
-        <p>
-          © {new Date().getFullYear()} Mohamed Abdikhabir. All rights reserved.
-        </p>
-        <div className="flex justify-center gap-4 mt-4">
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            Instagram
-          </Link>
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            Dribbble
-          </Link>
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            LinkedIn
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

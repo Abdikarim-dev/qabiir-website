@@ -13,6 +13,7 @@ import RecentProjects from "@/components/recent-projects";
 import AnimatedSection from "@/components/animated-section";
 import ProcessStep from "@/components/process-step";
 import PreFooter from "@/components/pre-footer";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -61,7 +62,7 @@ export default function Home() {
       </section>
 
       {/* Social Media Links */}
-      <div className="w-full max-w-md md:max-w-2xl px-4 flex justify-between border-t border-b border-gray-200 dark:border-gray-800 py-4">
+      <div className="w-full max-w-md md:max-w-2xl px-4 flex justify-between border-t border-b border-gray-50 dark:border-gray-800 py-4">
         <Link
           href="https://instagram.com"
           className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
@@ -86,7 +87,7 @@ export default function Home() {
       <RecentProjects />
 
       {/* Services Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-200 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -100,7 +101,7 @@ export default function Home() {
         </AnimatedSection>
 
         {/* 3D Visualization */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-10">
+        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -131,7 +132,7 @@ export default function Home() {
         </div>
 
         {/* 3D Animation */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-10">
+        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection
               animation="slide-right"
@@ -163,7 +164,7 @@ export default function Home() {
         </div>
 
         {/* FX & Simulation */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-10">
+        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -194,7 +195,7 @@ export default function Home() {
         </div>
 
         {/* Concept Development */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-10">
+        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection
               animation="slide-right"
@@ -233,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* Process Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-200 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -343,7 +344,7 @@ export default function Home() {
 
       {/* Rest of the page content remains the same */}
       {/* Testimonials Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-200 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -504,29 +505,7 @@ export default function Home() {
       </section> */}
       <PreFooter />
       {/* Footer */}
-      <footer className="w-full max-w-md md:max-w-2xl px-4 py-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
-        <p>© {new Date().getFullYear()} Qabiir. All rights reserved.</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            Instagram
-          </Link>
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            LinkedIn
-          </Link>
-          <Link
-            href="#"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            ArtStation
-          </Link>
-        </div>
-      </footer>
+      <Footer/>
     </main>
   );
 }

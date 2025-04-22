@@ -5,7 +5,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, X } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import PreFooter from "@/components/pre-footer";
+import Footer from "@/components/Footer";
 
 interface Project {
   id: string;
@@ -64,7 +66,7 @@ export default function SingleBrandProject() {
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261832/Hindis_Advert_Brand-04_t6dkcj.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-03_plfexf.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745261729/Hindis_Advert_Brand-01_hmge45.png",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-02_pcttzn.png"
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261730/Hindis_Advert_Brand-02_pcttzn.png",
       ],
       description:
         "Complete brand identity system for Hindis, including visual guidelines and marketing materials.",
@@ -195,7 +197,7 @@ export default function SingleBrandProject() {
       </section>
 
       {/* Back to Projects */}
-      <section className="w-full max-w-3xl px-4 py-12 mb-12 bg-gray-50 dark:bg-gray-900">
+      <section className="w-full max-w-3xl px-4 py-12 bg-gray-50 dark:bg-gray-900">
         <Link
           href="/branding"
           className="inline-flex items-center text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400 transition-colors"
@@ -205,34 +207,25 @@ export default function SingleBrandProject() {
         </Link>
       </section>
 
-      {/* Footer */}
-      <footer className="w-full bg-black text-white">
-        <div className="max-w-3xl mx-auto px-4 py-6 text-center text-xs text-gray-500">
-          <p>
-            © {new Date().getFullYear()} Habib Lee Pla. All rights reserved.
-          </p>
-          <div className="flex justify-center gap-4 mt-4">
-            <Link
-              href="#"
-              className="text-gray-500 hover:text-white transition-colors"
-            >
-              Instagram
-            </Link>
-            <Link
-              href="#"
-              className="text-gray-500 hover:text-white transition-colors"
-            >
-              Dribbble
-            </Link>
-            <Link
-              href="#"
-              className="text-gray-500 hover:text-white transition-colors"
-            >
-              LinkedIn
-            </Link>
-          </div>
-        </div>
-      </footer>
+      {/* Pre-Footer Section */}
+      <section className="w-full max-w-3xl bg-gray-50 dark:bg-gray-900">
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          <PreFooter />
+        </Suspense>
+        {/* Footer Section */}
+
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          <Footer />
+        </Suspense>
+      </section>
     </main>
   );
 }

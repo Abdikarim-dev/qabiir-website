@@ -2,12 +2,23 @@
 
 import dynamic from "next/dynamic";
 import { Suspense, useState, useRef, useEffect } from "react";
-import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, RotateCcw, Filter } from "lucide-react";
+import {
+  CuboidIcon as Cube,
+  X,
+  MessageSquare,
+  ZoomIn,
+  ZoomOut,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Filter,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
 import Header from "@/components/header";
+import Footer from "@/components/Footer";
 
 // Dynamically import components
 const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
@@ -20,8 +31,8 @@ const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
 const ProgressiveImage = dynamic(
   () => import("@/components/progressive-image"),
   {
-  ssr: true,
-  loading: () => <ImageSkeleton />,
+    ssr: true,
+    loading: () => <ImageSkeleton />,
   }
 );
 
@@ -57,71 +68,81 @@ export default function Designs() {
       id: "design-1",
       title: "Social Media Design 1",
       category: "Social Media",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890160/oqvmhijzv4vejo2h8wik.png",
     },
     {
       id: "design-2",
       title: "Eid Poster Design",
       category: "Posters",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890791/1-Eid_poster_tmzpza.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890791/1-Eid_poster_tmzpza.png",
     },
     {
       id: "design-3",
       title: "February Social Post",
       category: "Social Media",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890929/9-Febuary-12_muagje.png",
     },
     {
       id: "design-4",
       title: "Marketing Campaign",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890151/ccklyp2e6r9n09xqr0ql.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890151/ccklyp2e6r9n09xqr0ql.png",
     },
     {
       id: "design-5",
       title: "Brand Design",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890040/g5d021eh6sy2dwagakg8.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890040/g5d021eh6sy2dwagakg8.png",
     },
     {
       id: "design-6",
       title: "Social Media Campaign",
       category: "Social Media",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744890022/wjbbcdum15wz47dgod9b.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890022/wjbbcdum15wz47dgod9b.png",
     },
     {
       id: "design-7",
       title: "Marketing Design",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889783/o8yf2rfbzmhsdwhofz83.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889783/o8yf2rfbzmhsdwhofz83.png",
     },
     {
       id: "design-8",
       title: "Promotional Design",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889666/on1cxjdg97fpumrk1rvc.jpg",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889666/on1cxjdg97fpumrk1rvc.jpg",
     },
     {
       id: "design-9",
       title: "Social Media Post",
       category: "Social Media",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889567/z3qtskx30kacttqpvile.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889567/z3qtskx30kacttqpvile.png",
     },
     {
       id: "design-10",
       title: "Brand Campaign",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889529/ph7zfqjrykkjw1bnf7bd.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889529/ph7zfqjrykkjw1bnf7bd.png",
     },
     {
       id: "design-11",
       title: "Marketing Visual",
       category: "Marketing",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1744889310/mpeu4z05fueqpnujnrsx.jpg",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889310/mpeu4z05fueqpnujnrsx.jpg",
     },
   ];
   // Add more design projects here...
-  
 
   // Generate unique categories on component mount
   useEffect(() => {
@@ -132,9 +153,10 @@ export default function Designs() {
   }, []);
 
   // Filter projects based on active category
-  const filteredProjects = activeCategory === "All"
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
   // Featured project is the first one
   const featuredProject = filteredProjects[0];
@@ -144,7 +166,9 @@ export default function Designs() {
 
   // Function to open the lightbox
   const openLightbox = (image: string, title: string) => {
-    const index = filteredProjects.findIndex(project => project.image === image);
+    const index = filteredProjects.findIndex(
+      (project) => project.image === image
+    );
     setSelectedImage(image);
     setSelectedTitle(title);
     setSelectedIndex(index);
@@ -153,12 +177,12 @@ export default function Designs() {
 
   // Add zoom handlers
   const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
     setPosition({ x: 0, y: 0 });
   };
 
   const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+    setZoomLevel((prev) => Math.max(prev - 0.25, 1));
     setPosition({ x: 0, y: 0 });
   };
 
@@ -172,7 +196,7 @@ export default function Designs() {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
-        y: e.clientY - position.y
+        y: e.clientY - position.y,
       });
     }
   };
@@ -181,7 +205,7 @@ export default function Designs() {
     if (isDragging && zoomLevel > 1) {
       setPosition({
         x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y
+        y: e.clientY - dragStart.y,
       });
     }
   };
@@ -223,32 +247,32 @@ export default function Designs() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
-      
+
       switch (e.key) {
-        case 'Escape':
+        case "Escape":
           closeLightbox();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           goToNextImage();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           goToPrevImage();
           break;
-        case '+':
-        case '=':
+        case "+":
+        case "=":
           handleZoomIn();
           break;
-        case '-':
+        case "-":
           handleZoomOut();
           break;
-        case '0':
+        case "0":
           resetZoom();
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage, selectedIndex]);
 
   // Focus trap for modal
@@ -268,8 +292,8 @@ export default function Designs() {
             Social Media, Marketing & Poster Designs
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            A collection of social media posts, marketing materials, and poster designs created for various clients and
-            campaigns.
+            A collection of social media posts, marketing materials, and poster
+            designs created for various clients and campaigns.
           </p>
         </section>
 
@@ -277,10 +301,12 @@ export default function Designs() {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="h-4 w-4 text-gray-500" />
-            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Category</h2>
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Filter by Category
+            </h2>
           </div>
           <div className="flex flex-wrap gap-2">
-            {categories.map(category => (
+            {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
@@ -317,8 +343,12 @@ export default function Designs() {
                     priority
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h2 className="text-white text-xl font-bold">{featuredProject.title}</h2>
-                    <p className="text-gray-200 text-sm">{featuredProject.category}</p>
+                    <h2 className="text-white text-xl font-bold">
+                      {featuredProject.title}
+                    </h2>
+                    <p className="text-gray-200 text-sm">
+                      {featuredProject.category}
+                    </p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -338,7 +368,9 @@ export default function Designs() {
                     >
                       <div
                         className="relative aspect-[3/4] rounded-lg overflow-hidden h-full"
-                        onClick={() => openLightbox(project.image, project.title)}
+                        onClick={() =>
+                          openLightbox(project.image, project.title)
+                        }
                       >
                         <ProgressiveImage
                           src={project.image}
@@ -348,8 +380,12 @@ export default function Designs() {
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <h3 className="text-white font-bold">{project.title}</h3>
-                          <p className="text-gray-200 text-sm">{project.category}</p>
+                          <h3 className="text-white font-bold">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-200 text-sm">
+                            {project.category}
+                          </p>
                         </div>
                       </div>
                     </AnimatedSection>
@@ -360,7 +396,9 @@ export default function Designs() {
           </>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
-            <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">No projects found in this category.</p>
+            <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">
+              No projects found in this category.
+            </p>
             <Button
               variant="outline"
               onClick={() => setActiveCategory("All")}
@@ -372,7 +410,7 @@ export default function Designs() {
         )}
 
         {/* Pre-Footer Section */}
-        <section className="w-full py-16">
+        <section className="w-full pt-16">
           <Suspense
             fallback={
               <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
@@ -381,6 +419,15 @@ export default function Designs() {
             <PreFooter />
           </Suspense>
         </section>
+        {/* Footer Section */}
+
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          <Footer />
+        </Suspense>
 
         {/* Lightbox Modal */}
         {selectedImage && (
@@ -388,7 +435,7 @@ export default function Designs() {
             ref={modalRef}
             className="fixed inset-0 bg-black z-50 flex items-center justify-center outline-none"
             onClick={closeLightbox}
-            onKeyDown={(e) => e.key === 'Escape' && closeLightbox()}
+            onKeyDown={(e) => e.key === "Escape" && closeLightbox()}
             tabIndex={0}
             aria-modal="true"
             aria-labelledby="lightbox-title"
@@ -456,7 +503,7 @@ export default function Designs() {
                   <ChevronLeft className="h-6 w-6" />
                 </button>
               )}
-              
+
               {selectedIndex < filteredProjects.length - 1 && (
                 <button
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
@@ -470,7 +517,7 @@ export default function Designs() {
                 </button>
               )}
 
-              <div 
+              <div
                 className="w-full h-full flex items-center justify-center overflow-hidden"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
@@ -484,17 +531,27 @@ export default function Designs() {
                   className="max-w-full max-h-full object-contain transition-transform duration-200"
                   style={{
                     transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
-                    cursor: zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                    cursor:
+                      zoomLevel > 1
+                        ? isDragging
+                          ? "grabbing"
+                          : "grab"
+                        : "default",
                   }}
                   onClick={(e) => e.stopPropagation()}
                 />
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
-                <h3 id="lightbox-title" className="text-lg font-medium">{selectedTitle}</h3>
-                <p className="text-sm text-gray-300">Image {selectedIndex + 1} of {filteredProjects.length}</p>
+                <h3 id="lightbox-title" className="text-lg font-medium">
+                  {selectedTitle}
+                </h3>
+                <p className="text-sm text-gray-300">
+                  Image {selectedIndex + 1} of {filteredProjects.length}
+                </p>
                 <div className="text-xs text-gray-400 mt-1">
-                  Use arrow keys to navigate • Press ESC to close • +/- to zoom • 0 to reset zoom
+                  Use arrow keys to navigate • Press ESC to close • +/- to zoom
+                  • 0 to reset zoom
                 </div>
               </div>
             </div>

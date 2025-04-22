@@ -9,6 +9,7 @@ import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
 import Header from "@/components/header";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 // Dynamically import components
 const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
@@ -186,7 +187,7 @@ export default function BrandingPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
+      <main className="min-h-screen pt-24 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
         {/* Hero Section */}
         <section className="w-full py-8">
           <Suspense
@@ -268,8 +269,8 @@ export default function BrandingPage() {
           </div>
         </section>
 
-        {/* Services Section */}
-        <section className="w-full py-16">
+        {/* Pre-Footer Section */}
+        <section className="w-full pt-16">
           <Suspense
             fallback={
               <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
@@ -278,9 +279,18 @@ export default function BrandingPage() {
             <PreFooter />
           </Suspense>
         </section>
+        {/* Footer Section */}
+
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          <Footer />
+        </Suspense>
 
         {/* Lightbox Modal */}
-        <div className="w-full py-8">
+        {/* <div className="w-full py-8">
           <Suspense
             fallback={
               <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
@@ -302,7 +312,7 @@ export default function BrandingPage() {
               </p>
             </AnimatedSection>
           </Suspense>
-        </div>
+        </div> */}
       </main>
     </>
   );
