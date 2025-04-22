@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button"
 
 export default function About() {
   return (
-    <main className="flex min-h-screen flex-col items-center mt-4">
+    <main className="flex min-h-screen flex-col items-center pt-4">
       {/* Hero Image */}
       <div className="w-full max-w-3xl px-4 py-8 mt-8">
-        <div className="w-full h-80 bg-gradient-to-r from-purple-600 via-red-500 to-orange-500 rounded-xl overflow-hidden">
+        <div className="w-full h-[480px] bg-gradient-to-r from-purple-600 via-red-500 to-orange-500 rounded-xl overflow-hidden">
           <Image
-            src="/placeholder.svg?height=320&width=768"
+            src="/images/profile.png?height=480&width=768"
             width={768}
-            height={320}
+            height={480}
             alt="Habib Lee Pla"
             className="w-full h-full object-cover object-center"
           />

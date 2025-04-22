@@ -89,7 +89,7 @@ export default function SingleBrandProject() {
   return (
     <main className="flex min-h-screen flex-col items-center dark:bg-black text-gray-900 dark:text-gray-100">
       {/* Hero Image */}
-      <div className="w-full dark:bg-black mt-20">
+      <div className="w-full dark:bg-black">
         <div className="max-w-3xl mx-auto">
           <Image
             src={project.image}
