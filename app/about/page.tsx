@@ -2,6 +2,65 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+const careerData = [
+  {
+    id: 1,
+    company: "Qabiir Global",
+    initial: "Q",
+    position: "CEO and Founder",
+    period: "",
+    description: "As the CEO of Qabiir Global, I lead the vision, strategy, and growth of a creative agency focused on branding, 3D design, and digital media. I oversee operations, client relationships, and creative direction to ensure high-quality, impactful results. My leadership combines business strategy with design thinking to deliver innovative solutions for brands and organizations. At Qabiir Global, we help clients transform ideas into powerful visual experiences that drive success."
+  },
+  {
+    id: 2,
+    company: "EasyBiz Agency",
+    initial: "E",
+    position: "Senior Brand Designer & Design Partner",
+    period: "From Oct 2022 - present",
+    description: "As a Senior Designer, I lead multiple branding projects, create visual identity design, create production-ready UI/UX designs, and develop marketing materials and presentations slides and pitch decks."
+  },
+  {
+    id: 3,
+    company: "Dhalinta Media",
+    initial: "D",
+    position: "Head of Digital Media",
+    period: "From Mar 2024 - April 2025",
+    description: "As the Head of Digital Media at Dhalinta Media, I lead the strategy and execution of all digital content across platforms. I oversee content creation, social media campaigns, and digital branding to ensure strong online engagement. My role includes managing creative teams, setting visual direction, and analyzing performance for continuous improvement."
+  },
+  {
+    id: 4,
+    company: "Wasaradda Waxbarashada",
+    initial: "W",
+    position: "Creative Designer",
+    period: "From Feb 2023 - May 2024",
+    description: "As a Creative Designer at the Ministry of Education, I developed visual content for national campaigns and educational programs as online. I crafted branding materials, official presentations, and promotional assets for print and digital use. My designs supported communication strategies across departments and public initiatives."
+  },
+  {
+    id: 5,
+    company: "Deero Advert",
+    initial: "D",
+    position: "Creative Designer",
+    period: "From Aug 2023 - Jan 2024",
+    description: "As a Creative Designer at Deero Advert, I specialized in crafting brand visuals, marketing materials, and social media content for diverse clients. I led the design of campaigns that balanced creativity with strategy, enhancing brand visibility and engagement. My role involved translating client goals into compelling visuals across digital and print platforms."
+  },
+  {
+    id: 6,
+    company: "Tik Solution",
+    initial: "T",
+    position: "Creative Designer",
+    period: "From Jun 2023 - Dec 2024",
+    description: "As a Creative Designer at Tik Solution, I create tailored visual content that supports clients' digital marketing and branding goals. My work includes designing logos, social media assets, and campaign visuals that resonate with target audiences. I collaborate with the marketing and development teams to ensure cohesive visual communication across platforms."
+  },
+  {
+    id: 7,
+    company: "Sarah Cosmetics",
+    initial: "S",
+    position: "3D Animator and Visuals Product",
+    period: "",
+    description: "As a 3D Animator and Visuals Product Designer at Sarah Cosmetics, I specialize in creating realistic 3D product visualizations for marketing and advertising. I develop high-quality 3D animations that showcase the features and aesthetics of cosmetic products. My role includes working closely with the marketing team to create visually engaging content for digital platforms and promotional materials."
+  }
+];
+
 export default function About() {
   return (
     <main className="flex min-h-screen flex-col items-center pt-4">
@@ -100,60 +159,33 @@ export default function About() {
 
           {/* Career Timeline */}
           <div className="space-y-8">
-            {/* EasyBiz Agency */}
-            <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                  <span className="text-gray-900 dark:text-white text-xs">
-                    E
-                  </span>
+            {careerData.map((career) => (
+              <div key={career.id} className="bg-gray-100 dark:bg-gray-900 rounded-lg p-6">
+                <div className="flex flex-col items- gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                    <span className="text-white text-lg font-semibold">
+                      {career.initial}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">
+                      {career.company}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {career.position}
+                    </p>
+                    {career.period && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {career.period}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <h3 className="font-bold text-gray-900 dark:text-white">
-                  EasyBiz Agency
-                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {career.description}
+                </p>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Senior Brand Designer & Design Partner
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-                From Oct 2022 - present
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                As a Senior Designer, I lead multiple branding projects, create
-                visual identity design, create production-ready UI/UX designs,
-                and develop marketing materials and presentations slides and
-                pitch decks.
-              </p>
-            </div>
-
-            {/* Sazo Design Studio */}
-            <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                  <span className="text-gray-900 dark:text-white text-xs">
-                    S
-                  </span>
-                </div>
-                <h3 className="font-bold text-gray-900 dark:text-white">
-                  Sazo Design Studio
-                </h3>
-              </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Senior Brand Designer
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-                From Oct 2021 - Sept 2022
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                My role at the Visual and Web UI department involved the
-                creation of visual communications aimed at establishing and
-                strengthening brand identities. I worked on the development of
-                brand guidelines, visual identity, and user interface
-                implementation.
-              </p>
-            </div>
-
-            {/* Additional career items follow the same pattern... */}
+            ))}
           </div>
         </div>
       </section>

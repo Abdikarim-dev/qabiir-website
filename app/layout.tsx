@@ -23,14 +23,38 @@ const Header = dynamic(() => import("@/components/header"), {
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-
   title: "Qabiir - 3D Artist & FX Specialist",
   description: "3D Artist specializing in product visualization and animation",
-    generator: 'v0.dev',
-    icons:{
-      icon: '/logo.png',
-      apple: '/logo.png',
-    }
+  generator: 'v0.dev',
+  icons: {
+    icon: [
+      {
+        url: '/logos/favicon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png'
+      },
+      {
+        url: '/logos/favicon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png'
+      }
+    ],
+    apple: {
+      url: '/logos/apple-touch-icon.png',
+      type: 'image/png'
+    },
+    shortcut: '/logos/favicon.ico',
+    other: [
+      {
+        rel: 'android-chrome-192x192',
+        url: '/logos/android-chrome-192x192.png',
+      },
+      {
+        rel: 'android-chrome-512x512',
+        url: '/logos/android-chrome-512x512.png',
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
