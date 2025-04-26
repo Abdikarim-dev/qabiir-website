@@ -2,7 +2,17 @@
 
 import dynamic from "next/dynamic";
 import { Suspense, useState, useRef, useEffect } from "react";
-import { Paintbrush, X, MessageSquare, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, RotateCcw, ArrowRight } from "lucide-react";
+import {
+  Paintbrush,
+  X,
+  MessageSquare,
+  ZoomIn,
+  ZoomOut,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
@@ -22,8 +32,8 @@ const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
 const ProgressiveImage = dynamic(
   () => import("@/components/progressive-image"),
   {
-  ssr: true,
-  loading: () => <ImageSkeleton />,
+    ssr: true,
+    loading: () => <ImageSkeleton />,
   }
 );
 
@@ -53,23 +63,33 @@ export default function BrandingPage() {
     {
       id: "brand-1",
       title: "Dhalinta Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261063/Dhalinta_brand-01_y8uaxs.png",
     },
     {
       id: "brand-2",
       title: "Gorgor Logo Design",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261464/Gorgor_logo_presentation-17_e62lab.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261464/Gorgor_logo_presentation-17_e62lab.png",
     },
     {
       id: "brand-3",
       title: "Hindis Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745261729/Hindis_Advert_Brand-01_hmge45.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745261729/Hindis_Advert_Brand-01_hmge45.png",
     },
     {
       id: "brand-4",
       title: "Wakiil Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
-    }
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
+    },
+    {
+      id: "brand-5",
+      title: "Birimo Brand Identity",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745694540/birimo_01_big_peba4t.png",
+    },
   ];
 
   // Featured project is the first one
@@ -80,7 +100,7 @@ export default function BrandingPage() {
 
   // Function to open the lightbox
   const openLightbox = (image: string, title: string) => {
-    const index = projects.findIndex(project => project.image === image);
+    const index = projects.findIndex((project) => project.image === image);
     setSelectedImage(image);
     setSelectedTitle(title);
     setSelectedIndex(index);
@@ -89,12 +109,12 @@ export default function BrandingPage() {
 
   // Add zoom handlers
   const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
     setPosition({ x: 0, y: 0 });
   };
 
   const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+    setZoomLevel((prev) => Math.max(prev - 0.25, 1));
     setPosition({ x: 0, y: 0 });
   };
 
@@ -108,7 +128,7 @@ export default function BrandingPage() {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
-        y: e.clientY - position.y
+        y: e.clientY - position.y,
       });
     }
   };
@@ -117,7 +137,7 @@ export default function BrandingPage() {
     if (isDragging && zoomLevel > 1) {
       setPosition({
         x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y
+        y: e.clientY - dragStart.y,
       });
     }
   };
@@ -211,8 +231,8 @@ export default function BrandingPage() {
                 Branding & Identity
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-2xl">
-                Creating distinctive brand identities and visual systems that help businesses
-                stand out and connect with their audience.
+                Creating distinctive brand identities and visual systems that
+                help businesses stand out and connect with their audience.
               </p>
             </AnimatedSection>
           </Suspense>

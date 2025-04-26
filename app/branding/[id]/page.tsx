@@ -79,7 +79,8 @@ export default function SingleBrandProject() {
     {
       id: "brand-4",
       title: "Wakiil Brand Identity",
-      image: "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
       gallery: [
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745329228/Wakiil_brand-01_kw04mr.png",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745329229/Wakiil_brand-02_jpmzjg.png",
@@ -88,10 +89,32 @@ export default function SingleBrandProject() {
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745329308/Wakiil_brand-05_mjqijp.jpg",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745329294/Wakiil_brand-06_zxvzbx.jpg",
         "https://res.cloudinary.com/dofv7shih/image/upload/v1745329308/Wakiil_brand-07_ychuic.jpg",
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329302/Wakiil_brand-08_qaymij.jpg"
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745329302/Wakiil_brand-08_qaymij.jpg",
       ],
-      description: "Comprehensive brand identity development for Wakiil, showcasing visual elements and brand applications."
-    }
+      description:
+        "Comprehensive brand identity development for Wakiil, showcasing visual elements and brand applications.",
+    },
+    {
+      id: "brand-5",
+      title: "Birimo Brand Identity",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745694519/birimo_...-01_sprjhr.png",
+      gallery: [
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693093/Birimo_advert-02_bewfuf.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745692990/Birimo_advert-03_cy5qv3.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745692976/Birimo_advert-04_mnjnuu.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745692979/Birimo_advert-05_cpatsx.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693906/birimo.-03_kdzo65.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693905/birimo..-04_mx0dhl.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693137/Birimo_advert-07_jezedt.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693137/Birimo_advert-07_jezedt.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693136/Birimo_advert-11_fukmxb.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693018/Birimo_advert-12_kw0ujy.png",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1745693925/birimo_8-02_zhobit.png",
+      ],
+      description:
+        "Complete brand identity system for Birimo, including visual guidelines and marketing materials.",
+    },
   ];
 
   useEffect(() => {
