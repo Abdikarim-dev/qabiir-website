@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/select";
 import { Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import Header from "@/components/header";
-import PreFooter from "@/components/pre-footer";
 import Footer from "@/components/Footer";
 
 function ContactForm() {
@@ -32,6 +31,7 @@ function ContactForm() {
     message: "",
     date: "",
     time: "",
+    phone: "", // Add phone field
   });
 
   // Form submission states
@@ -103,6 +103,7 @@ function ContactForm() {
         message: "",
         date: "",
         time: "",
+        phone:""
       });
     } catch (error) {
       setSubmitStatus("error");
@@ -119,24 +120,52 @@ function ContactForm() {
 
   // Status display component
   const StatusMessage = () => {
-    if (submitStatus === "success") {
+    if (submitStatus === "success" || submitStatus === "error") {
       return (
-        <div className="flex items-center gap-2 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md mb-4">
-          <CheckCircle className="h-5 w-5" />
-          <span>Thank you for your message! I'll get back to you soon.</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 text-left shadow-xl transition-all">
+            <div className="flex items-center gap-3">
+              {submitStatus === "success" ? (
+                <>
+                  <CheckCircle className="h-6 w-6 text-green-500" />
+                  <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+                    Message Sent Successfully
+                  </h3>
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="h-6 w-6 text-red-500" />
+                  <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+                    Error
+                  </h3>
+                </>
+              )}
+            </div>
+            
+            <div className="mt-3">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {submitStatus === "success" 
+                  ? "Thank you for your message! I'll get back to you soon."
+                  : errorMessage}
+              </p>
+            </div>
+  
+            <div className="mt-5 flex justify-end">
+              <Button
+                onClick={() => {
+                  setSubmitStatus("idle");
+                  setErrorMessage("");
+                }}
+                className="inline-flex justify-center rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
         </div>
       );
     }
-
-    if (submitStatus === "error") {
-      return (
-        <div className="flex items-center gap-2 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-md mb-4">
-          <AlertCircle className="h-5 w-5" />
-          <span>{errorMessage}</span>
-        </div>
-      );
-    }
-
+  
     return null;
   };
 
@@ -163,7 +192,7 @@ function ContactForm() {
             </Button>
             <div className="flex items-center bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-full">
               <span className="text-gray-700 dark:text-gray-300">
-                cabdikariim405@gmail.com
+                qabiir.art@gmail.com
               </span>
             </div>
           </div>
@@ -227,6 +256,24 @@ function ContactForm() {
 
             <div className="space-y-2">
               <label
+                htmlFor="phone"
+                className="text-sm text-gray-600 dark:text-gray-400"
+              >
+                Phone Number
+              </label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="+252 612 34 56 78"
+                value={formData.phone}
+                onChange={handleChange}
+                className="rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-700"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
                 htmlFor="company"
                 className="text-sm text-gray-600 dark:text-gray-400"
               >
@@ -235,7 +282,7 @@ function ContactForm() {
               <Input
                 id="company"
                 name="company"
-                placeholder="Google..."
+                placeholder="Qabiir Global..."
                 value={formData.company}
                 onChange={handleChange}
                 disabled={isSubmitting}
@@ -265,6 +312,7 @@ function ContactForm() {
                   <SelectItem value="3d_animation">3D Animation</SelectItem>
                   <SelectItem value="vfx">VFX / CGI</SelectItem>
                   <SelectItem value="branding">Branding</SelectItem>
+                  <SelectItem value="logo">Logo</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
