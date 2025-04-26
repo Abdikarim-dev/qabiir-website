@@ -39,12 +39,11 @@ export default function Home() {
               </p>
             </div>
 
-            {/* <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white"></h1> */}
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+              Hello! I'm <span className="font-bold">Qabiir</span>,
+            </h1>
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-              Hello! I'm <span className="font-bold">Qabiir</span>, a 3D Artist
-              specializing in Fx Artist
-              <br className="hidden md:block" />
-              3D Product Animation and Visualization.
+              3D Artist & FX Specialist
             </h2>
 
             <p className="text-gray-600 dark:text-gray-400 max-w-xl">
@@ -54,10 +53,7 @@ export default function Home() {
             </p>
 
             <div className="mt-3">
-              <Button
-                className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6"
-                asChild
-              >
+              <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6" asChild>
                 <Link href="/contact">Let's work together</Link>
               </Button>
             </div>
@@ -239,10 +235,7 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Button
-            className="bg-blue-500 hover:bg-blue-600 rounded-full text-white"
-            asChild
-          >
+          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
             <Link href="/contact">Get a project quote</Link>
           </Button>
         </div>
@@ -351,10 +344,7 @@ export default function Home() {
           delay={600}
           className="flex justify-center mt-8"
         >
-          <Button
-            className="bg-blue-500 hover:bg-blue-600 rounded-full text-white"
-            asChild
-          >
+          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
             <Link href="/contact">Get a project quote</Link>
           </Button>
         </AnimatedSection>
