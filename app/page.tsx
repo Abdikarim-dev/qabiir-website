@@ -41,8 +41,8 @@ export default function Home() {
 
             {/* <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white"></h1> */}
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-              Hello! I'm <span className="font-bold">Qabiir</span>, a 3D Artist,
-              specializing in Fx Artist,
+              Hello! I'm <span className="font-bold">Qabiir</span>, a 3D Artist
+              specializing in Fx Artist
               <br className="hidden md:block" />
               3D Product Animation and Visualization.
             </h2>
