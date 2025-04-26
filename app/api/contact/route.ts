@@ -16,15 +16,22 @@ export async function POST(request: Request) {
 
     // Configure nodemailer transporter for Gmail
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.EMAIL_SERVER,
+      port: Number(process.env.EMAIL_PORT),
+      secure: process.env.EMAIL_SECURE === 'true',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      tls: {
-        rejectUnauthorized: false,
-      },
     });
+    
+    // Add error handling and logging
+    try {
+      await transporter.verify();
+      console.log('Email configuration verified');
+    } catch (error) {
+      console.error('Email configuration error:', error);
+    }
 
     // In your email sending function
     // const mailOptions = {
