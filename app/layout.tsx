@@ -2,6 +2,9 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -88,6 +91,7 @@ export default function RootLayout({
                 }
               ></Suspense>
               {children}
+              <WhatsAppButton />
             </div>
           </div>
         </ThemeProvider>
