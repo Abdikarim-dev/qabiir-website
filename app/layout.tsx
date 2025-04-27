@@ -75,7 +75,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="portfolio-theme"
         >
-          <div className="min-h-screen bg-[#FAFAF9] dark:bg-black text-gray-900 dark:text-gray-100">
+          <div className="min-h-screen bg-[#FAFAF9] dark:bg-[#111827] text-gray-900 dark:text-gray-100">
             <Header />
             <div className="max-w-3xl mx-auto border-x border-[#D5D5D4] dark:border-gray-800 min-h-screen">
               <Suspense

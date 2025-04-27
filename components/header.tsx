@@ -90,7 +90,7 @@ export default function Header() {
     >
       <div className="max-w-md md:max-w-2xl mx-auto px-4">
         {isSearchOpen ? (
-          <div className="bg-gray-800 dark:bg-gray-800 rounded-full px-4 py-2 flex items-center">
+          <div className="bg-[#363635] dark:bg-gray-800 rounded-full px-4 py-2 flex items-center">
             <Search size={20} className="text-gray-400 mr-2" />
             <input
               ref={searchInputRef}
@@ -106,7 +106,7 @@ export default function Header() {
             </button>
           </div>
         ) : (
-          <div className="bg-gray-800 dark:bg-gray-800 rounded-full px-4 py-2">
+          <div className="bg-[#363635] dark:bg-gray-800 rounded-full px-4 py-2">
             <div className="flex items-center justify-between">
               {/* Mobile Menu Button */}
               <button
@@ -251,7 +251,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-2 bg-gray-800 dark:bg-gray-800 rounded-lg p-4">
+          <div className="md:hidden mt-2 bg-[#363635] dark:bg-gray-800 rounded-lg p-4">
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/"
