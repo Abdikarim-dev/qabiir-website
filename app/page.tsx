@@ -33,7 +33,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-3 text-center md:text-left">
             <div className="flex items-center gap-2 justify-center md:justify-start">
-              <div className="w-2 h-2 rounded-full bg-green-400"></div>
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Available for new projects
               </p>
