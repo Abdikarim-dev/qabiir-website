@@ -170,8 +170,6 @@ function ContactForm() {
   };
 
   return (
-    <>
-      <Header />
       <main className="flex min-h-screen flex-col items-center pt-10">
         {/* Hero Section */}
         <section className="w-full max-w-3xl px-4 py-8 mt-8">
@@ -394,7 +392,6 @@ function ContactForm() {
         {/* Footer */}
         <Footer />
       </main>
-    </>
   );
 }
 

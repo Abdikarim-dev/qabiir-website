@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
-import Header from "@/components/header";
+// Remove this line: import Header from "@/components/header";
 import Footer from "@/components/Footer";
 
 // Dynamically import components
@@ -283,8 +283,8 @@ export default function Designs() {
   }, [selectedImage]);
 
   return (
-    <>
-      <Header />
+    
+      
       <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
         {/* Keep existing header section */}
         <section className="w-full max-w-3xl px-4 py-8 mt-8">
@@ -558,6 +558,5 @@ export default function Designs() {
           </div>
         )}
       </main>
-    </>
   );
 }

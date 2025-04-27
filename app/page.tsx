@@ -19,9 +19,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       {/* Hero Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-4 mt-20">
+      <section className="w-full max-w-md md:max-w-3xl px-6 py-6 mt-20">
         <div className="flex flex-col md:flex-row items-center gap-6 py-6">
-          <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500">
+          <div className="w-48 h-48 md:w-[19rem] md:h-80 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500">
             <Image
               src="/images/profile.png"
               width={256}
@@ -53,7 +53,10 @@ export default function Home() {
             </p>
 
             <div className="mt-3">
-              <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6" asChild>
+              <Button
+                className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-6"
+                asChild
+              >
                 <Link href="/contact">Let's work together</Link>
               </Button>
             </div>
@@ -62,7 +65,7 @@ export default function Home() {
       </section>
 
       {/* Social Media Links */}
-      <div className="w-full max-w-md md:max-w-2xl px-4 flex justify-between border-t border-b border-gray-50 dark:border-gray-800 py-4">
+      <div className="w-full max-w-md md:max-w-3xl px-6 flex justify-between border-t border-b border-[#D5D5D4] dark:border-gray-800 py-4">
         <Link
           href="https://www.instagram.com/qabiir.art/"
           target="_blank"
@@ -93,7 +96,7 @@ export default function Home() {
       <RecentProjects />
 
       {/* Services Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-3xl px-6 py-12 border-t border-[#D5D5D4] dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -107,7 +110,7 @@ export default function Home() {
         </AnimatedSection>
 
         {/* 3D Visualization */}
-        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
+        <div className="border-t border-[#D5D5D4] dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -138,7 +141,7 @@ export default function Home() {
         </div>
 
         {/* 3D Animation */}
-        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
+        <div className="border-t border-[#D5D5D4] dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection
               animation="slide-right"
@@ -170,7 +173,7 @@ export default function Home() {
         </div>
 
         {/* FX & Simulation */}
-        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
+        <div className="border-t border-[#D5D5D4] dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection animation="slide-up" className="flex-1">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -201,7 +204,7 @@ export default function Home() {
         </div>
 
         {/* Concept Development */}
-        <div className="border-t border-gray-50 dark:border-gray-800 py-10">
+        <div className="border-t border-[#D5D5D4] dark:border-gray-800 py-10">
           <div className="flex flex-col md:flex-row gap-8">
             <AnimatedSection
               animation="slide-right"
@@ -235,14 +238,17 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
+          <Button
+            className="bg-blue-500 hover:bg-blue-600 rounded-full text-white"
+            asChild
+          >
             <Link href="/contact">Get a project quote</Link>
           </Button>
         </div>
       </section>
 
       {/* Process Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-3xl px-6 py-12 border-t border-[#D5D5D4] dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -344,7 +350,10 @@ export default function Home() {
           delay={600}
           className="flex justify-center mt-8"
         >
-          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white" asChild>
+          <Button
+            className="bg-blue-500 hover:bg-blue-600 rounded-full text-white"
+            asChild
+          >
             <Link href="/contact">Get a project quote</Link>
           </Button>
         </AnimatedSection>
@@ -352,7 +361,7 @@ export default function Home() {
 
       {/* Rest of the page content remains the same */}
       {/* Testimonials Section */}
-      <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-50 dark:border-gray-800">
+      <section className="w-full max-w-md md:max-w-3xl px-6 py-12 border-t border-[#D5D5D4] dark:border-gray-800">
         <AnimatedSection
           animation="slide-up"
           className="flex flex-col items-center mb-10"
@@ -376,143 +385,112 @@ export default function Home() {
               <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">
-                  Thomas Smith
+                  Omar Abdirizak Abdullahi
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Creative Director at Pixel Studios
+                  CEO & Founder, Dhalinta Media
                 </p>
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Working with Qabiir was a game-changer for our product launch.
-              His attention to detail and ability to create photorealistic 3D
-              animations helped us showcase our product features in ways we
-              never thought possible. The final result exceeded our
-              expectations."
+              "Working with Qabiir at Dhalinta Media has been an incredible
+              journey. His creativity in 3D visualization and graphic design is
+              unmatched, bringing our projects to life with outstanding
+              precision and imagination. Qabiir combines artistic vision with
+              technical excellence, making him an essential part of our creative
+              team. His dedication, professionalism, and attention to detail
+              have elevated the quality of our work, and we are proud to have
+              him as part of the Dhalinta Media family."
             </p>
           </AnimatedSection>
-
-          {/* Testimonial 2 */}
           <AnimatedSection
             animation="slide-up"
-            delay={200}
+            delay={100}
             className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">
-                  Sarah Johnson
+                  Omar Abdirizak Abdullahi
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Marketing Director at TechVision
+                  CEO & Founder, Dhalinta Media
                 </p>
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Qabiir's 3D visualizations for our architectural project were
-              stunning. He captured the essence of our design and brought it to
-              life with incredible lighting and detail. The client was blown
-              away by the quality and it helped us secure the project."
+              "Working with Qabiir at Dhalinta Media has been an incredible
+              journey. His creativity in 3D visualization and graphic design is
+              unmatched, bringing our projects to life with outstanding
+              precision and imagination. Qabiir combines artistic vision with
+              technical excellence, making him an essential part of our creative
+              team. His dedication, professionalism, and attention to detail
+              have elevated the quality of our work, and we are proud to have
+              him as part of the Dhalinta Media family."
             </p>
           </AnimatedSection>
-
-          {/* Testimonial 3 */}
           <AnimatedSection
             animation="slide-up"
-            delay={300}
+            delay={100}
             className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">
-                  James Chen
+                  Omar Abdirizak Abdullahi
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Product Manager at InnoTech
+                  CEO & Founder, Dhalinta Media
                 </p>
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              "The FX work Qabiir did for our commercial was outstanding. The
-              fluid simulations and particle effects added that wow factor we
-              were looking for. He was professional, met all deadlines, and was
-              a pleasure to work with throughout the project."
+              "Working with Qabiir at Dhalinta Media has been an incredible
+              journey. His creativity in 3D visualization and graphic design is
+              unmatched, bringing our projects to life with outstanding
+              precision and imagination. Qabiir combines artistic vision with
+              technical excellence, making him an essential part of our creative
+              team. His dedication, professionalism, and attention to detail
+              have elevated the quality of our work, and we are proud to have
+              him as part of the Dhalinta Media family."
             </p>
           </AnimatedSection>
-
-          {/* Testimonial 4 */}
           <AnimatedSection
             animation="slide-up"
-            delay={400}
+            delay={100}
             className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">
-                  Amanda Wallace
+                  Omar Abdirizak Abdullahi
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Director at Visionary Films
+                  CEO & Founder, Dhalinta Media
                 </p>
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Qabiir's ability to translate our concept into stunning 3D
-              visuals was impressive. He understood our vision immediately and
-              enhanced it with his technical expertise. The animations he
-              created became the centerpiece of our campaign and received
-              amazing feedback."
+              "Working with Qabiir at Dhalinta Media has been an incredible
+              journey. His creativity in 3D visualization and graphic design is
+              unmatched, bringing our projects to life with outstanding
+              precision and imagination. Qabiir combines artistic vision with
+              technical excellence, making him an essential part of our creative
+              team. His dedication, professionalism, and attention to detail
+              have elevated the quality of our work, and we are proud to have
+              him as part of the Dhalinta Media family."
             </p>
           </AnimatedSection>
+
+          
         </div>
       </section>
 
-      {/* Contact Section */}
-      {/* <section className="w-full max-w-md md:max-w-2xl px-4 py-12 border-t border-gray-200 dark:border-gray-800">
-        <AnimatedSection
-          animation="slide-up"
-          className="flex flex-col items-center mb-10"
-        >
-          <div className="w-16 h-16 rounded-full bg-gray-900 dark:bg-gray-900 flex items-center justify-center mb-4">
-            <MessageSquare className="h-8 w-8 text-blue-500" />
-          </div>
-          <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
-            Get in touch
-          </h2>
-        </AnimatedSection>
-
-        <AnimatedSection
-          animation="slide-up"
-          delay={100}
-          className="text-center text-gray-600 dark:text-gray-400 mb-8"
-        >
-          <p>
-            I'm always open to discussing new projects, creative ideas or
-            opportunities to be part of your visions.
-          </p>
-        </AnimatedSection>
-
-        <AnimatedSection
-          animation="slide-up"
-          delay={200}
-          className="flex justify-center gap-4"
-        >
-          <Button className="bg-blue-500 hover:bg-blue-600 rounded-full text-white">
-            Contact me
-          </Button>
-          <Button
-            variant="outline"
-            className="rounded-full border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
-          >
-            Say hello
-          </Button>
-        </AnimatedSection>
-      </section> */}
-      <PreFooter />
       {/* Footer */}
+      <PreFooter />
       <Footer />
     </main>
   );

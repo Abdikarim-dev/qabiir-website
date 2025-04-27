@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
-import Header from "@/components/header";
+
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
@@ -211,7 +211,7 @@ export default function BrandingPage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="min-h-screen pt-24 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
         {/* Hero Section */}
         <section className="w-full py-8">

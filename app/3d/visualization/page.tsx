@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
 import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
-import Header from "@/components/header";
+// Remove this line: import Header from "@/components/header";
 
 // Dynamically import components
 const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
@@ -394,8 +394,6 @@ export default function VisualizationPage() {
   }, [selectedImage]);
 
   return (
-    <>
-      <Header />
     <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
       {/* Hero Section */}
       <section className="w-full py-8">
@@ -653,6 +651,5 @@ export default function VisualizationPage() {
             </div>
         )}
     </main>
-    </>
   );
 }
