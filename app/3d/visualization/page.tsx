@@ -55,64 +55,64 @@ export default function VisualizationPage() {
   const projects: Project[] = [
     {
       id: "tijabo-17",
-      title: "Product Visualization 1",
-      category: "Product Visualization",
+      title: "Yellow Rose Dark Spot",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804055/tijabo-17_umxqah.png",
     },
     {
       id: "tijabo-15",
-      title: "Product Visualization 2",
-      category: "Product Visualization",
+      title: "Anua Niacinamide TXA",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804032/tijabo-15_fdhgdk.png",
     },
     {
       id: "tijabo-11",
       title: "Nutrition Multi-Pack",
-      category: "Product Visualization",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804031/tijabo-11_dmof3k.png",
     },
     {
       id: "tijabo-10",
-      title: "Cosmetic Product",
-      category: "Cosmetic Visualization",
+      title: "Hiil Cup",
+      category: "Beverage Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804022/tijabo-10_jqeduw.png",
     },
     {
       id: "tijabo-12",
-      title: "Skincare Collection",
+      title: "Weleda Collection",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804006/tijabo-12_zqc8is.png",
     },
     {
       id: "tijabo-13",
-      title: "Premium Package",
-      category: "Packaging Design",
+      title: "David Walker Fragrance",
+      category: "Luxury Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803928/tijabo-13_rllrsl.png",
     },
     {
       id: "tijabo-19",
-      title: "Luxury Fragrance",
-      category: "Luxury Product",
+      title: "Skincare Products",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804119/tijabo-19_cya3ku.png",
     },
     {
       id: "tijabo-18",
-      title: "Beverage Collection",
-      category: "Beverage Visualization",
+      title: "Beydan Cups",
+      category: "Beverage Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804111/tijabo-18_bknbvh.png",
     },
     {
       id: "tijabo-17-2",
       title: "Premium Design",
-      category: "Product Visualization",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804055/tijabo-17_umxqah.png",
     },
@@ -132,15 +132,15 @@ export default function VisualizationPage() {
     },
     {
       id: "tijabo-25",
-      title: "Skincare Line",
+      title: "Yellow Rose",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803895/tijabo-25_jaydsu.png",
     },
     {
       id: "tijabo-26",
-      title: "Premium Packaging",
-      category: "Packaging Design",
+      title: "Yellow Rose",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803881/tijabo-26_gpxalj.png",
     },
@@ -153,8 +153,8 @@ export default function VisualizationPage() {
     },
     {
       id: "tijabo-06",
-      title: "Health Product",
-      category: "Product Visualization",
+      title: "Magool Scent",
+      category: "Luxury Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803840/tijabo-06_yoehdv.png",
     },
@@ -188,70 +188,70 @@ export default function VisualizationPage() {
     },
     {
       id: "tijabo-05",
-      title: "Lotion Product",
-      category: "Cosmetic Visualization",
+      title: "Beydan Cup",
+      category: "Beverage Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803768/tijabo-05_wak2tf.png",
     },
     {
       id: "tijabo-07",
-      title: "Luxury Packaging",
-      category: "Packaging Design",
+      title: "اول حكا يتنا",
+      category: "Luxury Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803749/tijabo-07_ydman5.png",
     },
     {
       id: "tijabo-01",
-      title: "Premium Collection",
-      category: "Product Visualization",
+      title: "C20",
+      category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803747/tijabo-01_qdi2fs.png",
     },
     {
       id: "tijabo-22",
-      title: "Skincare Solutions",
+      title: "Nutrition Lotion",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803730/tijabo-22_ic9w00.png",
     },
     {
       id: "tijabo-04",
-      title: "Premium Cream",
+      title: "Anua Niacinamide 10%",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803729/tijabo-04_ye0jqk.png",
     },
-    {
-      id: "tijabo-03",
-      title: "Luxury Bottle",
-      category: "Luxury Product",
-      image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744803693/tijabo-03_hnjxj5.png",
-    },
+    // {
+    //   id: "tijabo-03",
+    //   title: "",
+    //   category: "Cosmetic Visualization",
+    //   image:
+    //     "https://res.cloudinary.com/dofv7shih/image/upload/v1744803693/tijabo-03_hnjxj5.png",
+    // },
     {
       id: "tijabo-23",
-      title: "Cosmetic Line",
+      title: "Abu Walad Cream",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803686/tijabo-23_oqqjl5.png",
     },
     {
       id: "tijabo-02",
-      title: "Premium Package",
-      category: "Packaging Design",
+      title: "David Walker Fragrance",
+      category: "Luxury Product",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803681/tijabo-02_wc08fo.png",
     },
     {
       id: "tijabo-21",
-      title: "Beauty Collection",
+      title: "Nutrition Lotion",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803676/tijabo-21_sfdg98.png",
     },
     {
       id: "tijabo-20",
-      title: "Yellow Rose Collection",
+      title: "Yellow Rose",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803673/tijabo-20_n2xlys.png",
@@ -260,10 +260,13 @@ export default function VisualizationPage() {
 
   // Generate unique categories on component mount
   useEffect(() => {
-    const uniqueCategories = Array.from(
-      new Set(projects.map((project) => project.category))
-    );
-    setCategories(["All", ...uniqueCategories]);
+    const predefinedCategories = [
+      "All",
+      "Luxury Product",
+      "Cosmetic Visualization",
+      "Beverage Product"
+    ];
+    setCategories(predefinedCategories);
   }, []);
 
   // Filter projects based on active category

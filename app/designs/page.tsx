@@ -92,13 +92,13 @@ export default function Designs() {
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744890151/ccklyp2e6r9n09xqr0ql.png",
     },
-    {
-      id: "design-5",
-      title: "Brand Design",
-      category: "Marketing",
-      image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744890040/g5d021eh6sy2dwagakg8.png",
-    },
+    // {
+    //   id: "design-5",
+    //   title: "Brand Design",
+    //   category: "Marketing",
+    //   image:
+    //     "https://res.cloudinary.com/dofv7shih/image/upload/v1744890040/g5d021eh6sy2dwagakg8.png",
+    // },
     {
       id: "design-6",
       title: "Social Media Campaign",
@@ -113,13 +113,7 @@ export default function Designs() {
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744889783/o8yf2rfbzmhsdwhofz83.png",
     },
-    {
-      id: "design-8",
-      title: "Promotional Design",
-      category: "Marketing",
-      image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889666/on1cxjdg97fpumrk1rvc.jpg",
-    },
+
     {
       id: "design-9",
       title: "Social Media Post",
@@ -135,14 +129,20 @@ export default function Designs() {
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744889529/ph7zfqjrykkjw1bnf7bd.png",
     },
     {
-      id: "design-11",
-      title: "Marketing Visual",
+      id: "design-8",
+      title: "Promotional Design",
       category: "Marketing",
       image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889310/mpeu4z05fueqpnujnrsx.jpg",
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1744889666/on1cxjdg97fpumrk1rvc.jpg",
     },
+    // {
+    //   id: "design-11",
+    //   title: "Marketing Visual",
+    //   category: "Marketing",
+    //   image:
+    //     "https://res.cloudinary.com/dofv7shih/image/upload/v1744889310/mpeu4z05fueqpnujnrsx.jpg",
+    // },
   ];
-  // Add more design projects here...
 
   // Generate unique categories on component mount
   useEffect(() => {
