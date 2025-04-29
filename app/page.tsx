@@ -8,12 +8,51 @@ import {
   MessageSquare,
   ArrowRight,
   CuboidIcon as Cube,
+  Palette,
+  Film,
+  Headset,
+  Lightbulb,
+  Paintbrush,
+  WandSparkles,
+  FileOutput,
+  Wand,
 } from "lucide-react";
 import RecentProjects from "@/components/recent-projects";
 import AnimatedSection from "@/components/animated-section";
 import ProcessStep from "@/components/process-step";
 import PreFooter from "@/components/pre-footer";
 import Footer from "@/components/Footer";
+
+const testimonials = [
+  {
+    name: "Omar Abdirizak Abdullahi",
+    title: "CEO & Founder, Dhalinta Media",
+    image: "/testimonial-1-pic.png",
+    alt: "testimonial-1-omar",
+    quote: "Working with Qabiir at Dhalinta Media has been an incredible journey. His creativity in 3D visualization and graphic design is unmatched, bringing our projects to life with outstanding precision and imagination. Qabiir combines artistic vision with technical excellence, making him an essential part of our creative team. His dedication, professionalism, and attention to detail have elevated the quality of our work, and we are proud to have him as part of the Dhalinta Media family."
+  },
+  {
+    name: "Omar Abdirizak Abdullahi",
+    title: "CEO & Founder, Dhalinta Media",
+    image: "/testimonial-1-pic.png",
+    alt: "testimonial-1-omar",
+    quote: "Working with Qabiir at Dhalinta Media has been an incredible journey. His creativity in 3D visualization and graphic design is unmatched, bringing our projects to life with outstanding precision and imagination. Qabiir combines artistic vision with technical excellence, making him an essential part of our creative team. His dedication, professionalism, and attention to detail have elevated the quality of our work, and we are proud to have him as part of the Dhalinta Media family."
+  },
+  {
+    name: "Omar Abdirizak Abdullahi",
+    title: "CEO & Founder, Dhalinta Media",
+    image: "/testimonial-1-pic.png",
+    alt: "testimonial-1-omar",
+    quote: "Working with Qabiir at Dhalinta Media has been an incredible journey. His creativity in 3D visualization and graphic design is unmatched, bringing our projects to life with outstanding precision and imagination. Qabiir combines artistic vision with technical excellence, making him an essential part of our creative team. His dedication, professionalism, and attention to detail have elevated the quality of our work, and we are proud to have him as part of the Dhalinta Media family."
+  },
+  {
+    name: "Omar Abdirizak Abdullahi",
+    title: "CEO & Founder, Dhalinta Media",
+    image: "/testimonial-1-pic.png",
+    alt: "testimonial-1-omar",
+    quote: "Working with Qabiir at Dhalinta Media has been an incredible journey. His creativity in 3D visualization and graphic design is unmatched, bringing our projects to life with outstanding precision and imagination. Qabiir combines artistic vision with technical excellence, making him an essential part of our creative team. His dedication, professionalism, and attention to detail have elevated the quality of our work, and we are proud to have him as part of the Dhalinta Media family."
+  }
+];
 
 export default function Home() {
   return (
@@ -102,7 +141,7 @@ export default function Home() {
           className="flex flex-col items-center mb-10"
         >
           <div className="w-16 h-16 rounded-full bg-gray-900 dark:bg-gray-900 flex items-center justify-center mb-4">
-            <Cube className="h-8 w-8 text-blue-500" />
+            <ArrowRight className="h-8 w-8 text-blue-500" />
           </div>
           <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
             Here's what I bring to the table
@@ -155,7 +194,7 @@ export default function Home() {
 
               {/* Foreground content */}
               <div className="relative z-10 w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center">
-                <PenTool className="h-6 w-6 text-blue-500" />
+                <Film className="h-6 w-6 text-blue-500" />
               </div>
             </AnimatedSection>
             <AnimatedSection animation="slide-up" className="flex-1">
@@ -197,7 +236,7 @@ export default function Home() {
 
               {/* Foreground content */}
               <div className="relative z-10 w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center">
-                <MessageSquare className="h-6 w-6 text-blue-500" />
+                <Palette className="h-6 w-6 text-blue-500" />
               </div>
             </AnimatedSection>
           </div>
@@ -218,7 +257,7 @@ export default function Home() {
 
               {/* Foreground content */}
               <div className="relative z-10 w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center">
-                <RefreshCcw className="h-6 w-6 text-blue-500" />
+                <PenTool className="h-6 w-6 text-blue-500" />
               </div>
             </AnimatedSection>
 
@@ -273,7 +312,7 @@ export default function Home() {
             "What's your timeline and budget?",
             "What's your preferred visual style?",
           ]}
-          icon={<MessageSquare className="h-6 w-6 text-blue-500" />}
+          icon={<Headset className="h-6 w-6 text-blue-500" />}
           imagePosition="right"
           delay={100}
         />
@@ -289,7 +328,7 @@ export default function Home() {
             "Concept development",
             "Moodboard creation",
           ]}
-          icon={<AtomIcon className="h-6 w-6 text-blue-500" />}
+          icon={<Lightbulb className="h-6 w-6 text-blue-500" />}
           imagePosition="left"
           delay={200}
         />
@@ -306,7 +345,7 @@ export default function Home() {
             "Material development",
             "Initial renders for feedback",
           ]}
-          icon={<Cube className="h-6 w-6 text-blue-500" />}
+          icon={<Paintbrush className="h-6 w-6 text-blue-500" />}
           imagePosition="right"
           delay={300}
         />
@@ -323,9 +362,11 @@ export default function Home() {
             "Simulations",
             "Lighting setup",
           ]}
-          icon={<PenTool className="h-6 w-6 text-blue-500" />}
+          isVideo={true}
+          icon={null}
           imagePosition="left"
           delay={400}
+          cloudinaryId="abu_walad_dkmtb1"
         />
 
         {/* Step 5 - Rendering & Delivery */}
@@ -340,7 +381,7 @@ export default function Home() {
             "Final delivery",
             "Revisions if needed",
           ]}
-          icon={<MessageSquare className="h-6 w-6 text-blue-500" />}
+          icon={<FileOutput className="h-6 w-6 text-blue-500" />}
           imagePosition="right"
           delay={500}
         />
@@ -375,95 +416,22 @@ export default function Home() {
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Testimonial 1 */}
+          {/* First testimonial - visible */}
           <AnimatedSection
             animation="slide-up"
             delay={100}
             className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Omar Abdirizak Abdullahi
-                </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  CEO & Founder, Dhalinta Media
-                </p>
+              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 overflow-hidden">
+                <Image
+                  src="/testimonial-1-pic.png"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                  alt="testimonial-1-omar"
+                />
               </div>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Working with Qabiir at Dhalinta Media has been an incredible
-              journey. His creativity in 3D visualization and graphic design is
-              unmatched, bringing our projects to life with outstanding
-              precision and imagination. Qabiir combines artistic vision with
-              technical excellence, making him an essential part of our creative
-              team. His dedication, professionalism, and attention to detail
-              have elevated the quality of our work, and we are proud to have
-              him as part of the Dhalinta Media family."
-            </p>
-          </AnimatedSection>
-          <AnimatedSection
-            animation="slide-up"
-            delay={100}
-            className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Omar Abdirizak Abdullahi
-                </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  CEO & Founder, Dhalinta Media
-                </p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Working with Qabiir at Dhalinta Media has been an incredible
-              journey. His creativity in 3D visualization and graphic design is
-              unmatched, bringing our projects to life with outstanding
-              precision and imagination. Qabiir combines artistic vision with
-              technical excellence, making him an essential part of our creative
-              team. His dedication, professionalism, and attention to detail
-              have elevated the quality of our work, and we are proud to have
-              him as part of the Dhalinta Media family."
-            </p>
-          </AnimatedSection>
-          <AnimatedSection
-            animation="slide-up"
-            delay={100}
-            className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Omar Abdirizak Abdullahi
-                </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  CEO & Founder, Dhalinta Media
-                </p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              "Working with Qabiir at Dhalinta Media has been an incredible
-              journey. His creativity in 3D visualization and graphic design is
-              unmatched, bringing our projects to life with outstanding
-              precision and imagination. Qabiir combines artistic vision with
-              technical excellence, making him an essential part of our creative
-              team. His dedication, professionalism, and attention to detail
-              have elevated the quality of our work, and we are proud to have
-              him as part of the Dhalinta Media family."
-            </p>
-          </AnimatedSection>
-          <AnimatedSection
-            animation="slide-up"
-            delay={100}
-            className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">
                   Omar Abdirizak Abdullahi
@@ -485,7 +453,28 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          
+          {/* Placeholder testimonials */}
+          {[1, 2, 3].map((index) => (
+            <AnimatedSection
+              key={index}
+              animation="slide-up"
+              delay={100}
+              className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 rounded-lg p-6"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-gray-400 dark:bg-gray-600"></div>
+                <div className="space-y-2">
+                  <div className="h-4 w-32 bg-gray-400 dark:bg-gray-600 rounded"></div>
+                  <div className="h-3 w-24 bg-gray-400 dark:bg-gray-600 rounded"></div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="h-3 w-full bg-gray-400 dark:bg-gray-600 rounded"></div>
+                <div className="h-3 w-5/6 bg-gray-400 dark:bg-gray-600 rounded"></div>
+                <div className="h-3 w-4/6 bg-gray-400 dark:bg-gray-600 rounded"></div>
+              </div>
+            </AnimatedSection>
+          ))}
         </div>
       </section>
 
