@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
     images: [
       {
-        url: "/logos/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logos/android-chrome-512x512.png", // Using existing image temporarily
+        width: 512,
+        height: 512,
         alt: "Qabiir - 3D Artist & Visual Effects Portfolio"
       }
     ]
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qabiir - Professional 3D Artist & Visual Effects",
     description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
-    images: ["/logos/twitter-image.jpg"]
+    images: ["/logos/android-chrome-512x512.png"] // Using existing image temporarily
   },
   icons: {
     icon: [
