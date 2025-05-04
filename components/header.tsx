@@ -18,6 +18,10 @@ export default function Header() {
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const dropdown3DRef = React.useRef<HTMLDivElement>(null);
   const dropdownVFXRef = React.useRef<HTMLDivElement>(null);
+  
+  if (pathname === '/maintenance') {
+    return null; // Don't show on the maintenance page
+  }
 
   // Handle mounting to avoid hydration mismatch
   React.useEffect(() => {
