@@ -112,6 +112,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Qabiir",
+              "url": "https://qabiir.com",
+              "image": "/logos/android-chrome-512x512.png",
+              "description": "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+              "jobTitle": "3D Artist & FX Specialist",
+              "sameAs": [
+                // Add your social media URLs here
+                "https://qabiir.com"
+              ]
+            })
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
