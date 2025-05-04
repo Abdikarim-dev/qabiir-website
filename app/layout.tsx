@@ -31,7 +31,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Qabiir - 3D Artist & FX Specialist",
   description: "3D Artist specializing in product visualization and animation",
-  generator: "v0.dev",
+  generator: "Github-link:Abdikarim-dev",
+  verification: {
+    google: "EMQ_F3LEwThSVZ_2-Ujf1ev98DTwgmEpBu2CdeJxYpI",
+  },
   icons: {
     icon: [
       {
