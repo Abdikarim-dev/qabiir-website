@@ -30,10 +30,49 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Qabiir - 3D Artist & FX Specialist",
-  description: "3D Artist specializing in product visualization and animation",
+  description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services. Expertise in creating stunning visual content for brands and businesses.",
   generator: "Github-link:Abdikarim-dev",
+  keywords: [
+    "3D Artist",
+    "Visual Effects Specialist",
+    "CGI Artist",
+    "Product Visualization",
+    "3D Animation",
+    "VFX Artist",
+    "Motion Graphics",
+    "Product Rendering",
+    "3D Product Animation",
+    "Commercial CGI",
+    "Visual Effects",
+    "3D Modeling",
+    "Product CGI",
+    "Digital Artist",
+    "Creative Professional"
+  ],
   verification: {
     google: "EMQ_F3LEwThSVZ_2-Ujf1ev98DTwgmEpBu2CdeJxYpI",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://qabiir.com",
+    siteName: "Qabiir - 3D Artist & FX Specialist",
+    title: "Qabiir - Professional 3D Artist & Visual Effects Specialist",
+    description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+    images: [
+      {
+        url: "/logos/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Qabiir - 3D Artist & Visual Effects Portfolio"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Qabiir - Professional 3D Artist & Visual Effects",
+    description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+    images: ["/logos/twitter-image.jpg"]
   },
   icons: {
     icon: [
