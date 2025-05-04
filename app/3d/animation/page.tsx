@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
-import { PenTool, MessageSquare } from "lucide-react";
+import { Suspense, useState, useMemo, useEffect } from "react";
+import { PenTool, MessageSquare, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import CloudinaryVideoWrapper from "./cloudinary-video-wrapper";
@@ -10,8 +10,24 @@ import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
 
 export default function AnimationPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Cloud name from environment variable
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
@@ -21,7 +37,7 @@ export default function AnimationPage() {
     {
       id: "abu-walad-1",
       title: "Abu Walad Skincare",
-      category: "Product Animation",
+      category: "Cream Animation",
       description:
         "3D animation showcasing skincare product features and benefits",
       cloudinaryId: "abu_walad_dkmtb1",
@@ -31,7 +47,7 @@ export default function AnimationPage() {
     {
       id: "ishop-software",
       title: "iShop Software",
-      category: "Software Visualization",
+      category: "Product Animation",
       description: "3D animation showcasing software interface and features",
       cloudinaryId: "ishop_software_bwmiel",
       thumbnail: "/images/ishop-software.png",
@@ -40,7 +56,7 @@ export default function AnimationPage() {
     {
       id: "salam-mastercard",
       title: "Salam Mastercard",
-      category: "Financial Product Animation",
+      category: "Product Animation",
       description: "Dynamic visualization of banking and payment solutions",
       cloudinaryId: "salam_mastercard_zuygzm",
       thumbnail: "/images/salam-mastercard.png",
@@ -49,7 +65,7 @@ export default function AnimationPage() {
     {
       id: "yellow-rose-cream",
       title: "Yellow Rose Cream",
-      category: "Beauty Product Animation",
+      category: "Cream Animation",
       description: "Elegant showcase of skincare cream and its benefits",
       cloudinaryId: "Yellow_rose_cream_xmpuog",
       thumbnail: "/images/yellow-rose.png",
@@ -57,7 +73,7 @@ export default function AnimationPage() {
     {
       id: "hiil",
       title: "Hiil Beauty Products",
-      category: "Beauty Product Animation",
+      category: "Product Animation",
       description: "Luxurious presentation of beauty product line",
       cloudinaryId: "Hiil_lirfsj",
       thumbnail: "/images/hiil.png",
@@ -66,7 +82,7 @@ export default function AnimationPage() {
     {
       id: "david-walker",
       title: "David Walker Fragrances",
-      category: "Luxury Fragrance Animation",
+      category: "Fragrance Animation",
       description: "Premium fragrance bottle design showcase",
       cloudinaryId: "David_walker_h3yk1w",
       thumbnail: "/images/david-walker.png",
@@ -74,7 +90,7 @@ export default function AnimationPage() {
     {
       id: "my-perfumes",
       title: "My Perfumes Collection",
-      category: "Fragrance Collection",
+      category: "Fragrance Animation",
       description: "Artistic display of premium perfume collection",
       cloudinaryId: "My_perfumes_mbrhpp",
       thumbnail: "/images/my-perfumes.png",
@@ -83,7 +99,7 @@ export default function AnimationPage() {
     {
       id: "abu-walad-2",
       title: "Abu Walad Collection",
-      category: "Product Collection",
+      category: "Cream Animation",
       description: "Complete showcase of the Abu Walad skincare line",
       cloudinaryId: "Abu_walad1_ahippd",
       thumbnail: "/images/abu-walad-2.png",
@@ -92,7 +108,7 @@ export default function AnimationPage() {
     {
       id: "nutrition-1",
       title: "Nutritional Supplements",
-      category: "Health Products",
+      category: "Cream Animation",
       description: "Visualization of health supplement benefits",
       cloudinaryId: "nut_yxftle",
       thumbnail: "/images/nutrition-1.png",
@@ -100,7 +116,7 @@ export default function AnimationPage() {
     {
       id: "nutrition-3",
       title: "Advanced Nutrition",
-      category: "Health Products",
+      category: "Cream Animation",
       description: "Premium nutritional product showcase",
       cloudinaryId: "Nutrition3_aluxt7",
       thumbnail: "/images/nutrition-3.png",
@@ -109,7 +125,7 @@ export default function AnimationPage() {
     {
       id: "yellow-rose-2",
       title: "Yellow Rose Premium",
-      category: "Beauty Products",
+      category: "Cream Animation",
       description: "Premium skincare product visualization",
       cloudinaryId: "yellow_rose_2_a1flzp",
       thumbnail: "/images/yellow-rose-2.png",
@@ -121,16 +137,16 @@ export default function AnimationPage() {
     const uniqueCategories = new Set(
       animationProjects.map((project) => project.category)
     );
-    return ["all", ...Array.from(uniqueCategories)];
+    return ["All", ...Array.from(uniqueCategories)];
   }, [animationProjects]);
 
   // Filter projects based on selected category
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === "all") return animationProjects;
+    if (activeCategory === "All") return animationProjects;
     return animationProjects.filter(
-      (project) => project.category === selectedCategory
+      (project) => project.category === activeCategory
     );
-  }, [animationProjects, selectedCategory]);
+  }, [animationProjects, activeCategory]);
 
   // Generate Cloudinary thumbnail URL
   const getCloudinaryThumbnail = (publicId: string) => {
@@ -153,76 +169,85 @@ export default function AnimationPage() {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              className="rounded-full"
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </Button>
-          ))}
-        </div>
-
-        {/* Featured Animation */}
-        <div className="mb-16">
-          <Suspense
-            fallback={
-              <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-            }
-          >
-            <div className="w-full max-w-2xl mx-auto">
-              <CloudinaryVideoWrapper
-                publicId={
-                  filteredProjects[0]?.cloudinaryId ||
-                  animationProjects[0].cloudinaryId
-                }
-                className="w-full aspect-[16/9] rounded-lg overflow-hidden"
-                controls={true}
-                autoPlay={false}
-                loop={true}
-                muted={true}
-                poster={getCloudinaryThumbnail(
-                  filteredProjects[0]?.cloudinaryId ||
-                    animationProjects[0].cloudinaryId
-                )}
-              />
-            </div>
-          </Suspense>
-        </div>
-
-        {/* Animation Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
-          {filteredProjects.slice(1).map((project, index) => (
-            <div
-              key={project.id}
-              className="bg-transparent rounded-lg overflow-hidden shadow-md group"
-            >
-              <AnimatedSection
-                animation="slide-up"
-                delay={100 * index}
-                className="h-full"
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Filter className="h-4 w-4 text-gray-500" />
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Filter by Category
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  activeCategory === category
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+                }`}
               >
-                <div className="relative aspect-[9/16] max-w-md mx-auto">
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Animation and Grid Section */}
+        <div className="mb-16">
+          {/* Banner video only on larger screens */}
+          <div className="hidden md:block mb-16">
+            {filteredProjects.length > 2 && (
+              <Suspense
+                fallback={
+                  <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+                }
+              >
+                <div className="w-full max-w-2xl mx-auto">
                   <CloudinaryVideoWrapper
-                    publicId={project.cloudinaryId}
-                    className="w-full h-full object-cover rounded-lg"
+                    publicId={filteredProjects[0].cloudinaryId}
+                    className="w-full aspect-[16/9] rounded-lg overflow-hidden"
                     controls={true}
                     autoPlay={false}
                     loop={true}
                     muted={true}
-                    poster={getCloudinaryThumbnail(project.cloudinaryId)}
+                    poster={getCloudinaryThumbnail(filteredProjects[0].cloudinaryId)}
                   />
                 </div>
-              </AnimatedSection>
-            </div>
-          ))}
+              </Suspense>
+            )}
+          </div>
+
+          {/* Grid for all projects on mobile, remaining projects on desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {(isMobile || filteredProjects.length <= 2 ? filteredProjects : filteredProjects.slice(1)).map((project, index) => (
+              <div
+                key={project.id}
+                className="bg-transparent rounded-lg overflow-hidden shadow-md group"
+              >
+                <AnimatedSection
+                  animation="slide-up"
+                  delay={100 * (isMobile ? index + 1 : index)}
+                  className="h-full"
+                >
+                  <div className="relative aspect-[9/13] max-w-md mx-auto">
+                    <CloudinaryVideoWrapper
+                      publicId={project.cloudinaryId}
+                      className="w-full h-full object-cover rounded-lg"
+                      controls={true}
+                      autoPlay={false}
+                      loop={true}
+                      muted={true}
+                      poster={getCloudinaryThumbnail(project.cloudinaryId)}
+                    />
+                  </div>
+                </AnimatedSection>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* CTA Section */}
-        
       </section>
 
       {/* Pre-Footer / Contact CTA */}

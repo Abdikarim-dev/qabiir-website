@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useState, useMemo, useEffect } from "react";
 import { Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CloudinaryVideoWrapper from "@/app/3d/animation/cloudinary-video-wrapper";
@@ -8,6 +8,18 @@ import AnimatedSection from "@/components/animated-section";
 import PreFooter from "@/components/pre-footer";
 
 export default function CGIPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Cloud name from environment variable
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
@@ -105,38 +117,40 @@ export default function CGIPage() {
 
         {/* Featured CGI */}
         <div className="mb-16">
-          <Suspense
-            fallback={
-              <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-            }
-          >
-            <div className="w-full max-w-2xl mx-auto">
-              <CloudinaryVideoWrapper
-                publicId={cgiProjects[0].cloudinaryId}
-                className="w-full aspect-[16/9] rounded-lg overflow-hidden"
-                controls={true}
-                autoPlay={false}
-                loop={true}
-                muted={true}
-                poster={getCloudinaryThumbnail(cgiProjects[0].cloudinaryId)}
-              />
-            </div>
-          </Suspense>
+          <div className="hidden md:block">
+            <Suspense
+              fallback={
+                <div className="w-full aspect-[16/9] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+              }
+            >
+              <div className="w-full max-w-2xl mx-auto">
+                <CloudinaryVideoWrapper
+                  publicId={cgiProjects[0].cloudinaryId}
+                  className="w-full aspect-[16/9] rounded-lg overflow-hidden"
+                  controls={true}
+                  autoPlay={false}
+                  loop={true}
+                  muted={true}
+                  poster={getCloudinaryThumbnail(cgiProjects[0].cloudinaryId)}
+                />
+              </div>
+            </Suspense>
+          </div>
         </div>
 
         {/* CGI Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
-          {cgiProjects.slice(1).map((project, index) => (
+          {(isMobile ? cgiProjects : cgiProjects.slice(1)).map((project, index) => (
             <div
               key={project.id}
               className="bg-transparent rounded-lg overflow-hidden shadow-md group"
             >
               <AnimatedSection
                 animation="slide-up"
-                delay={100 * index}
+                delay={100 * (isMobile ? index + 1 : index)}
                 className="h-full"
               >
-                <div className="relative aspect-[9/16] max-w-md mx-auto">
+                <div className="relative aspect-[9/13] max-w-md mx-auto">
                   <CloudinaryVideoWrapper
                     publicId={project.cloudinaryId}
                     className="w-full h-full object-cover rounded-lg"
