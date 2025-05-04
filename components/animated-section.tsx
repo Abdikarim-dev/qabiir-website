@@ -1,8 +1,8 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import type { ReactNode } from "react"
 import { useInView } from "react-intersection-observer"
-import { cn } from "@/lib/utils"
 
 interface AnimatedSectionProps {
   children: ReactNode

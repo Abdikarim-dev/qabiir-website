@@ -1,12 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { Suspense, useState, useRef, useEffect } from "react";
-import { CuboidIcon as Cube, X, MessageSquare, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, RotateCcw, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
-import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, CuboidIcon as Cube, Filter, RotateCcw, X, ZoomIn, ZoomOut } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Suspense, useEffect, useRef, useState } from "react";
 // Remove this line: import Header from "@/components/header";
 
 // Dynamically import components

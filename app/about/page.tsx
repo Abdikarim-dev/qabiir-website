@@ -1,8 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import PreFooter from "@/components/pre-footer";
 import Footer from "@/components/Footer";
+import PreFooter from "@/components/pre-footer";
+import Image from "next/image";
 
 const careerData = [
   {

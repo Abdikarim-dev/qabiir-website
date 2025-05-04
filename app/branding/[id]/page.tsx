@@ -1,13 +1,12 @@
 "use client";
 
+import Footer from "@/components/Footer";
+import PreFooter from "@/components/pre-footer";
+import { ArrowLeft, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, X } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
-import PreFooter from "@/components/pre-footer";
-import Footer from "@/components/Footer";
+import { Suspense, useEffect, useState } from "react";
 
 interface Project {
   id: string;

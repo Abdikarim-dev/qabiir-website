@@ -1,25 +1,16 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { Suspense, useState, useRef, useEffect } from "react";
-import {
-  Paintbrush,
-  X,
-  MessageSquare,
-  ZoomIn,
-  ZoomOut,
-  ChevronLeft,
-  ChevronRight,
-  RotateCcw,
-  ArrowRight,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ImageSkeleton from "@/components/image-skeleton";
-import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
+import {
+  Paintbrush
+} from "lucide-react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense, useEffect, useRef, useState } from "react";
 
-import Image from "next/image";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 // Dynamically import components
 const AnimatedSection = dynamic(() => import("@/components/animated-section"), {

@@ -1,13 +1,10 @@
 "use client";
 
-import { Suspense, useState, useMemo, useEffect } from "react";
-import { PenTool, MessageSquare, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import CloudinaryVideoWrapper from "./cloudinary-video-wrapper";
 import AnimatedSection from "@/components/animated-section";
-import Link from "next/link";
 import PreFooter from "@/components/pre-footer";
+import { Filter, PenTool } from "lucide-react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import CloudinaryVideoWrapper from "./cloudinary-video-wrapper";
 
 export default function AnimationPage() {
   const [activeCategory, setActiveCategory] = useState<string>("All");

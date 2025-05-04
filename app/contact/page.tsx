@@ -1,13 +1,8 @@
 "use client";
 
-import type React from "react";
-import { Suspense } from "react";
-import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -15,9 +10,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-import Header from "@/components/header";
-import Footer from "@/components/Footer";
+import { Textarea } from "@/components/ui/textarea";
+import { AlertCircle, CheckCircle, Loader2, Mail } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import type React from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 function ContactForm() {
   const nameInputRef = useRef<HTMLInputElement>(null);

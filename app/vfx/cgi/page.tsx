@@ -1,11 +1,10 @@
 "use client";
 
-import { Suspense, useState, useMemo, useEffect } from "react";
-import { Wand2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import CloudinaryVideoWrapper from "@/app/3d/animation/cloudinary-video-wrapper";
 import AnimatedSection from "@/components/animated-section";
 import PreFooter from "@/components/pre-footer";
+import { Wand2 } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function CGIPage() {
   const [isMobile, setIsMobile] = useState(false);
