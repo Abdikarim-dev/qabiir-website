@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services. Expertise in creating stunning visual content for brands and businesses.",
   generator: "Github-link:Abdikarim-dev",
   keywords: [
+    "Qabiir",
+    "Mohamed Abdikhabir",
+    "Qabiir Global",
     "3D Artist",
     "Visual Effects Specialist",
     "CGI Artist",
@@ -61,9 +64,9 @@ export const metadata: Metadata = {
     description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
     images: [
       {
-        url: "/logos/android-chrome-512x512.png", // Using existing image temporarily
-        width: 512,
-        height: 512,
+        url: "/logos/favicon.ico", // Using existing image temporarily
+        // width: 512,
+        // height: 512,
         alt: "Qabiir - 3D Artist & Visual Effects Portfolio"
       }
     ]
