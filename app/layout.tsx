@@ -1,4 +1,8 @@
 import type React from "react";
+
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -30,7 +34,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Qabiir - 3D Artist & FX Specialist",
-  description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services. Expertise in creating stunning visual content for brands and businesses.",
+  description:
+    "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services. Expertise in creating stunning visual content for brands and businesses.",
   generator: "Github-link:Abdikarim-dev",
   keywords: [
     "Qabiir",
@@ -50,7 +55,7 @@ export const metadata: Metadata = {
     "3D Modeling",
     "Product CGI",
     "Digital Artist",
-    "Creative Professional"
+    "Creative Professional",
   ],
   verification: {
     google: "EMQ_F3LEwThSVZ_2-Ujf1ev98DTwgmEpBu2CdeJxYpI",
@@ -61,21 +66,23 @@ export const metadata: Metadata = {
     url: "https://qabiir.com",
     siteName: "Qabiir - 3D Artist & FX Specialist",
     title: "Qabiir - Professional 3D Artist & Visual Effects Specialist",
-    description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+    description:
+      "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
     images: [
       {
         url: "/logos/favicon.ico", // Using existing image temporarily
         // width: 512,
         // height: 512,
-        alt: "Qabiir - 3D Artist & Visual Effects Portfolio"
-      }
-    ]
+        alt: "Qabiir - 3D Artist & Visual Effects Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Qabiir - Professional 3D Artist & Visual Effects",
-    description: "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
-    images: ["/logos/android-chrome-512x512.png"] // Using existing image temporarily
+    description:
+      "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+    images: ["/logos/android-chrome-512x512.png"], // Using existing image temporarily
   },
   icons: {
     icon: [
@@ -122,16 +129,17 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              "name": "Qabiir",
-              "url": "https://qabiir.com",
-              "image": "/logos/android-chrome-512x512.png",
-              "description": "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
-              "jobTitle": "3D Artist & FX Specialist",
-              "sameAs": [
+              name: "Qabiir",
+              url: "https://qabiir.com",
+              image: "/logos/android-chrome-512x512.png",
+              description:
+                "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
+              jobTitle: "3D Artist & FX Specialist",
+              sameAs: [
                 // Add your social media URLs here
-                "https://qabiir.com"
-              ]
-            })
+                "https://qabiir.com",
+              ],
+            }),
           }}
         />
       </head>
@@ -156,6 +164,8 @@ export default function RootLayout({
                 }
               ></Suspense>
               {children}
+              <Analytics />
+              <SpeedInsights />
               <WhatsAppButton />
             </div>
           </div>
