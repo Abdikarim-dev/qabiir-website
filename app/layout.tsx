@@ -1,7 +1,7 @@
 import type React from "react";
 
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -70,19 +70,10 @@ export const metadata: Metadata = {
       "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
     images: [
       {
-        url: "/logos/favicon.ico", // Using existing image temporarily
-        // width: 512,
-        // height: 512,
+        url: "/logos/favicon.ico",
         alt: "Qabiir - 3D Artist & Visual Effects Portfolio",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Qabiir - Professional 3D Artist & Visual Effects",
-    description:
-      "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
-    images: ["/logos/android-chrome-512x512.png"], // Using existing image temporarily
   },
   icons: {
     icon: [
@@ -123,6 +114,25 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/logos/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/logos/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/logos/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/logos/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -136,8 +146,8 @@ export default function RootLayout({
                 "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
               jobTitle: "3D Artist & FX Specialist",
               sameAs: [
-                // Add your social media URLs here
                 "https://qabiir.com",
+                "https://www.linkedin.com/in/qabiir" // Replace with actual LinkedIn URL
               ],
             }),
           }}
@@ -174,5 +184,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-import "./globals.css";
