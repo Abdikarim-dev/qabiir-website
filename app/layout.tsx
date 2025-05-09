@@ -70,7 +70,7 @@ export const metadata: Metadata = {
       "Professional 3D Artist and Visual Effects Specialist offering high-quality CGI, product visualization, animations, and VFX services.",
     images: [
       {
-        url: "/logos/favicon.ico",
+        url: "/logos/android-chrome-512x512.png",
         alt: "Qabiir - 3D Artist & Visual Effects Portfolio",
       },
     ],
@@ -147,7 +147,7 @@ export default function RootLayout({
               jobTitle: "3D Artist & FX Specialist",
               sameAs: [
                 "https://qabiir.com",
-                "https://www.linkedin.com/in/qabiir" // Replace with actual LinkedIn URL
+                "https://www.linkedin.com/in/qabiir/",
               ],
             }),
           }}
