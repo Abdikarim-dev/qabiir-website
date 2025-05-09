@@ -62,18 +62,18 @@ export default function VisualizationPage() {
   // Projects with Cloudinary URLs
   const projects: Project[] = [
     {
-      id: "tijabo-100",
-      title: "Jasmine Fragrance",
-      category: "Luxury Product",
-      image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1746794067/Jasmin_perfume-022_i79hpx.png",
-    },
-    {
       id: "tijabo-17",
       title: "Yellow Rose Dark Spot",
       category: "Cosmetic Visualization",
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744804055/tijabo-17_umxqah.png",
+    },
+    {
+      id: "tijabo-100",
+      title: "Jasmine Fragrance",
+      category: "Luxury Product",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1746794067/Jasmin_perfume-022_i79hpx.png",
     },
     {
       id: "tijabo-15",
