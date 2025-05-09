@@ -3,7 +3,16 @@
 import ImageSkeleton from "@/components/image-skeleton";
 import PreFooter from "@/components/pre-footer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, CuboidIcon as Cube, Filter, RotateCcw, X, ZoomIn, ZoomOut } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  CuboidIcon as Cube,
+  Filter,
+  RotateCcw,
+  X,
+  ZoomIn,
+  ZoomOut,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useRef, useState } from "react";
 // Remove this line: import Header from "@/components/header";
@@ -19,8 +28,8 @@ const AnimatedSection = dynamic(() => import("@/components/animated-section"), {
 const ProgressiveImage = dynamic(
   () => import("@/components/progressive-image"),
   {
-  ssr: true,
-  loading: () => <ImageSkeleton />,
+    ssr: true,
+    loading: () => <ImageSkeleton />,
   }
 );
 
@@ -52,6 +61,13 @@ export default function VisualizationPage() {
 
   // Projects with Cloudinary URLs
   const projects: Project[] = [
+    {
+      id: "tijabo-100",
+      title: "Jasmine Fragrance",
+      category: "Luxury Product",
+      image:
+        "https://res.cloudinary.com/dofv7shih/image/upload/v1746794067/Jasmin_perfume-022_i79hpx.png",
+    },
     {
       id: "tijabo-17",
       title: "Yellow Rose Dark Spot",
@@ -178,13 +194,13 @@ export default function VisualizationPage() {
       image:
         "https://res.cloudinary.com/dofv7shih/image/upload/v1744803815/tijabo-27_vycosx.png",
     },
-    {
-      id: "tijabo-24-2",
-      title: "Premium Skincare",
-      category: "Cosmetic Visualization",
-      image:
-        "https://res.cloudinary.com/dofv7shih/image/upload/v1744803770/tijabo-24_ixzocc.png",
-    },
+    // {
+    //   id: "tijabo-24-2",
+    //   title: "Premium Skincare",
+    //   category: "Cosmetic Visualization",
+    //   image:
+    //     "https://res.cloudinary.com/dofv7shih/image/upload/v1744803770/tijabo-24_ixzocc.png",
+    // },
     {
       id: "tijabo-05",
       title: "Beydan Cup",
@@ -263,15 +279,16 @@ export default function VisualizationPage() {
       "All",
       "Luxury Product",
       "Cosmetic Visualization",
-      "Beverage Product"
+      "Beverage Product",
     ];
     setCategories(predefinedCategories);
   }, []);
 
   // Filter projects based on active category
-  const filteredProjects = activeCategory === "All"
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
   // Featured project is the first one
   const featuredProject = filteredProjects[0];
@@ -281,7 +298,9 @@ export default function VisualizationPage() {
 
   // Function to open the lightbox
   const openLightbox = (image: string, title: string) => {
-    const index = filteredProjects.findIndex(project => project.image === image);
+    const index = filteredProjects.findIndex(
+      (project) => project.image === image
+    );
     setSelectedImage(image);
     setSelectedTitle(title);
     setSelectedIndex(index);
@@ -290,12 +309,12 @@ export default function VisualizationPage() {
 
   // Add zoom handlers
   const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
     setPosition({ x: 0, y: 0 }); // Reset position when zooming
   };
 
   const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+    setZoomLevel((prev) => Math.max(prev - 0.25, 1));
     setPosition({ x: 0, y: 0 }); // Reset position when zooming
   };
 
@@ -309,7 +328,7 @@ export default function VisualizationPage() {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
-        y: e.clientY - position.y
+        y: e.clientY - position.y,
       });
     }
   };
@@ -318,7 +337,7 @@ export default function VisualizationPage() {
     if (isDragging && zoomLevel > 1) {
       setPosition({
         x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y
+        y: e.clientY - dragStart.y,
       });
     }
   };
@@ -360,32 +379,32 @@ export default function VisualizationPage() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
-      
+
       switch (e.key) {
-        case 'Escape':
+        case "Escape":
           closeLightbox();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           goToNextImage();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           goToPrevImage();
           break;
-        case '+':
-        case '=':
+        case "+":
+        case "=":
           handleZoomIn();
           break;
-        case '-':
+        case "-":
           handleZoomOut();
           break;
-        case '0':
+        case "0":
           resetZoom();
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage, selectedIndex]);
 
   // Focus trap for modal
@@ -399,259 +418,283 @@ export default function VisualizationPage() {
     <main className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900 max-w-3xl mx-auto px-4">
       {/* Hero Section */}
       <section className="w-full py-8">
-          <Suspense
-            fallback={
-              <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-            }
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          <AnimatedSection
+            animation="slide-up"
+            className="flex flex-col items-center mb-12"
           >
-            <AnimatedSection
-              animation="slide-up"
-              className="flex flex-col items-center mb-12"
-            >
             <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-4">
               <Cube className="h-8 w-8 text-blue-500" />
             </div>
-              <h1 className="text-4xl font-bold text-center mb-4">
-                3D Visualization
-              </h1>
+            <h1 className="text-4xl font-bold text-center mb-4">
+              3D Visualization
+            </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-2xl">
-                Creating photorealistic 3D visualizations for products, packaging,
-                and branding that showcase your designs with stunning detail and
-                lighting.
+              Creating photorealistic 3D visualizations for products, packaging,
+              and branding that showcase your designs with stunning detail and
+              lighting.
             </p>
           </AnimatedSection>
         </Suspense>
 
-          {/* Category Filter */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Filter className="h-4 w-4 text-gray-500" />
-              <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Category</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {categories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
-                    activeCategory === category
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
-                  }`}
+        {/* Category Filter */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Filter className="h-4 w-4 text-gray-500" />
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Filter by Category
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  activeCategory === category
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {filteredProjects.length > 0 ? (
+          <>
+            {/* Featured Project */}
+            <Suspense
+              fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
+            >
+              <AnimatedSection animation="fade-in" className="mb-16">
+                <div
+                  className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() =>
+                    openLightbox(featuredProject.image, featuredProject.title)
+                  }
                 >
-                  {category}
-                </button>
+                  <ProgressiveImage
+                    src={featuredProject.image}
+                    alt={featuredProject.title}
+                    fill
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h2 className="text-white text-xl font-bold">
+                      {featuredProject.title}
+                    </h2>
+                    <p className="text-gray-200 text-sm">
+                      {featuredProject.category}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </Suspense>
+
+            {/* Project Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {gridProjects.map((project, index) => (
+                <div key={project.id} className="group cursor-pointer">
+                  <Suspense
+                    fallback={<ImageSkeleton height={300} className="w-full" />}
+                  >
+                    <AnimatedSection
+                      animation="slide-up"
+                      delay={100 * index}
+                      className="h-full"
+                    >
+                      <div
+                        className="relative aspect-square rounded-lg overflow-hidden h-full"
+                        onClick={() =>
+                          openLightbox(project.image, project.title)
+                        }
+                      >
+                        <ProgressiveImage
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <h3 className="text-white font-bold">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-200 text-sm">
+                            {project.category}
+                          </p>
+                        </div>
+                      </div>
+                    </AnimatedSection>
+                  </Suspense>
+                </div>
               ))}
             </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-16">
+            <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">
+              No projects found in this category.
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => setActiveCategory("All")}
+              className="rounded-md"
+            >
+              Show all projects
+            </Button>
           </div>
-
-          {filteredProjects.length > 0 ? (
-            <>
-        {/* Featured Project */}
-              <Suspense
-                fallback={<ImageSkeleton height={400} className="w-full mb-16" />}
-              >
-          <AnimatedSection animation="fade-in" className="mb-16">
-                  <div
-                    className="relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() =>
-                      openLightbox(featuredProject.image, featuredProject.title)
-                    }
-                  >
-                <ProgressiveImage
-                  src={featuredProject.image}
-                  alt={featuredProject.title}
-                  fill
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  priority
-                />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <h2 className="text-white text-xl font-bold">{featuredProject.title}</h2>
-                      <p className="text-gray-200 text-sm">{featuredProject.category}</p>
-                </div>
-            </div>
-          </AnimatedSection>
-        </Suspense>
-
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {gridProjects.map((project, index) => (
-                  <div key={project.id} className="group cursor-pointer">
-                    <Suspense
-                      fallback={<ImageSkeleton height={300} className="w-full" />}
-                    >
-                <AnimatedSection
-                        animation="slide-up"
-                        delay={100 * index}
-                  className="h-full"
-                >
-                        <div
-                          className="relative aspect-square rounded-lg overflow-hidden h-full"
-                          onClick={() => openLightbox(project.image, project.title)}
-                        >
-                      <ProgressiveImage
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <h3 className="text-white font-bold">{project.title}</h3>
-                            <p className="text-gray-200 text-sm">{project.category}</p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              </Suspense>
-                  </div>
-          ))}
-        </div>
-            </>
-          ) : (
-            <div className="flex flex-col items-center justify-center py-16">
-              <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">No projects found in this category.</p>
-              <Button
-                variant="outline"
-                onClick={() => setActiveCategory("All")}
-                className="rounded-md"
-              >
-                Show all projects
-              </Button>
-            </div>
-          )}
+        )}
       </section>
 
       {/* Services Section */}
       <section className="w-full py-16">
-          {/* CTA Section */}
-          <Suspense
-            fallback={
-              <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-            }
-          >
-            {/* Pre-Footer / Contact CTA */}
-            <PreFooter />
-          </Suspense>
-        </section>
+        {/* CTA Section */}
+        <Suspense
+          fallback={
+            <div className="h-40 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          }
+        >
+          {/* Pre-Footer / Contact CTA */}
+          <PreFooter />
+        </Suspense>
+      </section>
 
-        {/* Lightbox Modal */}
-        {selectedImage && (
-          <div
-            ref={modalRef}
-            className="fixed inset-0 bg-black z-50 flex items-center justify-center outline-none"
-            onClick={closeLightbox}
-            onKeyDown={(e) => e.key === 'Escape' && closeLightbox()}
-            tabIndex={0}
-            aria-modal="true"
-            aria-labelledby="lightbox-title"
-            role="dialog"
-          >
-            <div className="relative w-full h-full flex flex-col items-center justify-center">
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div
+          ref={modalRef}
+          className="fixed inset-0 bg-black z-50 flex items-center justify-center outline-none"
+          onClick={closeLightbox}
+          onKeyDown={(e) => e.key === "Escape" && closeLightbox()}
+          tabIndex={0}
+          aria-modal="true"
+          aria-labelledby="lightbox-title"
+          role="dialog"
+        >
+          <div className="relative w-full h-full flex flex-col items-center justify-center">
+            <button
+              className="absolute top-4 right-4 bg-black/50 rounded-full p-2 text-white z-10 hover:bg-black/70"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeLightbox();
+              }}
+              aria-label="Close lightbox"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {/* Zoom Controls */}
+            <div className="absolute top-4 left-4 flex gap-2 z-10">
               <button
-                className="absolute top-4 right-4 bg-black/50 rounded-full p-2 text-white z-10 hover:bg-black/70"
+                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
                 onClick={(e) => {
                   e.stopPropagation();
-                  closeLightbox();
+                  handleZoomIn();
                 }}
-                aria-label="Close lightbox"
+                aria-label="Zoom in"
               >
-                <X className="h-6 w-6" />
+                <ZoomIn className="h-6 w-6" />
               </button>
-
-              {/* Zoom Controls */}
-              <div className="absolute top-4 left-4 flex gap-2 z-10">
-                <button
-                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleZoomIn();
-                  }}
-                  aria-label="Zoom in"
-                >
-                  <ZoomIn className="h-6 w-6" />
-                </button>
-                <button
-                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleZoomOut();
-                  }}
-                  aria-label="Zoom out"
-                >
-                  <ZoomOut className="h-6 w-6" />
-                </button>
-                <button
-                  className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    resetZoom();
-                  }}
-                  aria-label="Reset zoom"
-                >
-                  <RotateCcw className="h-6 w-6" />
-                </button>
-                <div className="bg-black/50 rounded-full px-3 flex items-center text-white">
-                  {Math.round(zoomLevel * 100)}%
-                </div>
-              </div>
-
-              {/* Previous/Next buttons */}
-              {selectedIndex > 0 && (
-                <button
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goToPrevImage();
-                  }}
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
-              )}
-              
-              {selectedIndex < filteredProjects.length - 1 && (
-                <button
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goToNextImage();
-                  }}
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              )}
-
-              <div 
-                className="w-full h-full flex items-center justify-center overflow-hidden"
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
+              <button
+                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleZoomOut();
+                }}
+                aria-label="Zoom out"
               >
-                <img
-                  ref={imageRef}
-                  src={selectedImage}
-                  alt={selectedTitle}
-                  className="max-w-full max-h-full object-contain transition-transform duration-200"
-                  style={{
-                    transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
-                    cursor: zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                />
+                <ZoomOut className="h-6 w-6" />
+              </button>
+              <button
+                className="bg-black/50 rounded-full p-2 text-white hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  resetZoom();
+                }}
+                aria-label="Reset zoom"
+              >
+                <RotateCcw className="h-6 w-6" />
+              </button>
+              <div className="bg-black/50 rounded-full px-3 flex items-center text-white">
+                {Math.round(zoomLevel * 100)}%
               </div>
+            </div>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
-                <h3 id="lightbox-title" className="text-lg font-medium">{selectedTitle}</h3>
-                <p className="text-sm text-gray-300">Image {selectedIndex + 1} of {filteredProjects.length}</p>
-                <div className="text-xs text-gray-400 mt-1">
-                  Use arrow keys to navigate • Press ESC to close • +/- to zoom • 0 to reset zoom
-                </div>
+            {/* Previous/Next buttons */}
+            {selectedIndex > 0 && (
+              <button
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevImage();
+                }}
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+            )}
+
+            {selectedIndex < filteredProjects.length - 1 && (
+              <button
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-2 text-white hover:bg-black/70 z-10"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNextImage();
+                }}
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            )}
+
+            <div
+              className="w-full h-full flex items-center justify-center overflow-hidden"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
+              <img
+                ref={imageRef}
+                src={selectedImage}
+                alt={selectedTitle}
+                className="max-w-full max-h-full object-contain transition-transform duration-200"
+                style={{
+                  transform: `scale(${zoomLevel}) translate(${position.x}px, ${position.y}px)`,
+                  cursor:
+                    zoomLevel > 1
+                      ? isDragging
+                        ? "grabbing"
+                        : "grab"
+                      : "default",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-white text-center">
+              <h3 id="lightbox-title" className="text-lg font-medium">
+                {selectedTitle}
+              </h3>
+              <p className="text-sm text-gray-300">
+                Image {selectedIndex + 1} of {filteredProjects.length}
+              </p>
+              <div className="text-xs text-gray-400 mt-1">
+                Use arrow keys to navigate • Press ESC to close • +/- to zoom •
+                0 to reset zoom
               </div>
             </div>
-            </div>
-        )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }
