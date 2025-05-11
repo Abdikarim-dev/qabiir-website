@@ -72,7 +72,7 @@ export default function About() {
       <div className="w-full max-w-3xl px-4 py-8 mt-8">
         <div className="w-full h-[480px] bg-gradient-to-r from-purple-600 via-red-500 to-orange-500 rounded-xl overflow-hidden relative">
           <Image
-            src="/images/profile.png?height=480&width=768"
+            src="https://res.cloudinary.com/dofv7shih/image/upload/v1746955911/profile_qpcdxv.png?height=480&width=768"
             width={768}
             height={480}
             alt="Mohamed Abdikhabir"

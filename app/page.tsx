@@ -1,27 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
+import AnimatedSection from "@/components/animated-section";
+import Footer from "@/components/Footer";
+import PreFooter from "@/components/pre-footer";
+import ProcessStep from "@/components/process-step";
+import RecentProjects from "@/components/recent-projects";
 import { Button } from "@/components/ui/button";
 import {
-  AtomIcon,
-  PenTool,
-  RefreshCcw,
-  MessageSquare,
   ArrowRight,
   CuboidIcon as Cube,
-  Palette,
+  FileOutput,
   Film,
   Headset,
   Lightbulb,
+  MessageSquare,
   Paintbrush,
-  WandSparkles,
-  FileOutput,
-  Wand,
+  Palette,
+  PenTool
 } from "lucide-react";
-import RecentProjects from "@/components/recent-projects";
-import AnimatedSection from "@/components/animated-section";
-import ProcessStep from "@/components/process-step";
-import PreFooter from "@/components/pre-footer";
-import Footer from "@/components/Footer";
+import Image from "next/image";
+import Link from "next/link";
 
 const testimonials = [
   {
@@ -62,7 +58,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-center gap-6 py-6">
           <div className="w-48 h-48 md:w-[19rem] md:h-80 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500">
             <Image
-              src="/images/profile.png"
+              src="https://res.cloudinary.com/dofv7shih/image/upload/v1746955911/profile_qpcdxv.png"
               width={256}
               height={256}
               alt="Qabiir"
